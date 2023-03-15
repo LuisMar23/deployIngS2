@@ -35,13 +35,7 @@ export class UsuarioComponent implements OnInit {
     private fb: FormBuilder,
     private _alertServices: AlertsService
   ) {
-    this.form = this.fb.group({
-      nombre: ['', Validators.required],
-      apellido: ['', Validators.required],
-      username: ['', Validators.required],
-      password: ['', Validators.required],
-      usertype: ['', Validators.required],
-    });
+    this.form = this.Formulario();
   }
 
   ngOnInit(): void {
@@ -100,5 +94,14 @@ export class UsuarioComponent implements OnInit {
   }
   getUserAuth(){
     return this.usuarioService.getUser();
+  }
+  private Formulario() {
+    this.fb.group({
+      nombre: ['', Validators.required],
+      apellido: ['', Validators.required],
+      username: ['', Validators.required],
+      password: ['', Validators.required],
+      usertype: ['', Validators.required],
+    });
   }
 }
