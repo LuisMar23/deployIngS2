@@ -17,7 +17,7 @@ export class DialogUsuarioComponent implements OnInit {
     private usuarioService:UsuarioService,
     private _alertServices:AlertsService,
     public modalRef: MdbModalRef<DialogUsuarioComponent>) {
-      this.form = this.propUsuario();
+      this.form = this.formulario();
      }
 
   ngOnInit(): void {
@@ -38,7 +38,7 @@ export class DialogUsuarioComponent implements OnInit {
   private setForm() {
     this.form.patchValue(this.usuarioEdit);
   }
-  propUsuario(){
+  private formulario(){
     return this.fb.group({
       nombre: ['', Validators.required],
       apellido: ['', Validators.required],
