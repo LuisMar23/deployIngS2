@@ -8,6 +8,7 @@ import { UsuarioComponent } from './usuario/usuario.component';
 import { RolComponent } from './rol/rol.component';
 import { PermisosComponent } from './permisos/permisos.component';
 import { DataTablesModule } from 'angular-datatables';
+import { DialogUsuarioComponent } from './usuario/dialog-usuario/dialog-usuario.component';
 
 
 
@@ -16,7 +17,8 @@ import { DataTablesModule } from 'angular-datatables';
   declarations: [
     UsuarioComponent,
     RolComponent,
-    PermisosComponent
+    PermisosComponent,
+    DialogUsuarioComponent
   ],
   imports: [
     CommonModule,

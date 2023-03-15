@@ -17,13 +17,7 @@ export class DialogProveedorComponent implements OnInit {
     private _alertService: AlertsService,
     public modalRef: MdbModalRef<DialogProveedorComponent>,
   ) {
-    this.form = this.fb.group({
-      id:[''],
-      nombre: ['', Validators.required],
-      contacto: ['', Validators.required],
-      correo: ['', Validators.required],
-      direccion: ['', Validators.required],
-    });
+    this.form = this.formulario();
   }
 
   ngOnInit(): void {
@@ -69,5 +63,14 @@ export class DialogProveedorComponent implements OnInit {
   }
   private setForm() {  
     this.form.patchValue(this.proveedorEdit);
+  }
+  private formulario() {
+    this.fb.group({
+      id:[''],
+      nombre: ['', Validators.required],
+      contacto: ['', Validators.required],
+      correo: ['', Validators.required],
+      direccion: ['', Validators.required],
+    });
   }
 }
