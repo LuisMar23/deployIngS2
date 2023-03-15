@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
-import { IUsuario,IJWTResponse,AuthService } from 'src/app/core';
+import { IUsuario,IJWTResponse,AuthService, AlertsService } from 'src/app/core';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
     private authService: AuthService,
     private cookieService: CookieService,
     private route: Router,
- 
+    private _alertService:AlertsService,
   ) {
     this.form = this.fb.group({
       username: ['', [Validators.required]],
@@ -32,13 +32,8 @@ export class LoginComponent implements OnInit {
     this.authService.authToken(user).subscribe({next:(data) => {
       this.saveToken(data);
       this.route.navigate(['/home']);
-    }, error:(error) => {
-      Swal.fire({
-        icon: 'error',
-        title: 'Error de Sesion',
-        text: 'El usuario o contraseña no es correcto!',
-      });
-    }})
+      //metodo refactorizado Rober Guerrero
+    }, error:(error) => this._alertService.alertError("Credenciales incorrectas")});
     this.form.reset();
   }
 
