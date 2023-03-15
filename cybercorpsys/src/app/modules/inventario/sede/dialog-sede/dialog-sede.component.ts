@@ -17,10 +17,7 @@ export class DialogSedeComponent implements OnInit {
     private _alertService: AlertsService,
     public modalRef: MdbModalRef<DialogSedeComponent>
   ) {
-    this.form = this.fb.group({
-      id: [''],
-      nombre: ['', [Validators.required]],
-    });
+    this.form = this.formulario();
   }
 
   ngOnInit(): void {
@@ -66,5 +63,11 @@ export class DialogSedeComponent implements OnInit {
   }
   private setForm() {  
     this.form.patchValue(this.sedeEdit);
+  }
+  private formulario(){
+    this.fb.group({
+      id: [''],
+      nombre: ['', [Validators.required]],
+    });
   }
 }
