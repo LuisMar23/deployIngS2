@@ -25,7 +25,6 @@ export class DialogProductoComponent implements OnInit {
   proveedores: IProveedor[] = [];
   productoEdit!: IProducto;
   imagenBase64!: string;
-
   constructor(
     private fb: FormBuilder,
     private _sanitizer: DomSanitizer,
@@ -35,20 +34,9 @@ export class DialogProductoComponent implements OnInit {
     private _proveedorService: ProveedorService,
     private _alertService: AlertsService
   ) {
-    this.form = this.fb.group({
-      id: [''],
-      nombre: ['', Validators.required],
-      descripcion: ['', Validators.required],
-      cantidad: ['', Validators.required],
-      garantia: ['', Validators.required],
-      industria: ['', Validators.required],
-      marca: ['', Validators.required],
-      preciocompra: ['', [Validators.required, Validators.min(0)]],
-      precioventa: ['', [Validators.required, Validators.min(0)]],
-      sede: ['', Validators.required],
-      proveedor: ['', Validators.required],
-      imagen: [''],
-    });
+    //Luis Martinez RF3
+    //Creaacion de un submetodo para las propiedades de producto que pueden aumentar a futuro lo que haria mas grande el codigo 
+    this.form = this.propProducto();
   }
 
   ngOnInit(): void {
@@ -70,12 +58,11 @@ export class DialogProductoComponent implements OnInit {
     }
   }
 
+  //Luis Martinez RF2
+  //Crear submetodo que recibe una imagen selecciona que sirve para codificar la imagen
   cargarImagen(event: any) {
     const fileCapture = event.target.files[0];
-    this.encode64(fileCapture).then((imagen: any) => {
-      console.log(imagen);
-      this.imagenBase64 = imagen.base;
-    });
+    this.encodeImg(fileCapture);
   }
 
   private addProducto(producto: IProducto) {
@@ -145,5 +132,30 @@ export class DialogProductoComponent implements OnInit {
   }
   private setForm() {
     this.form.patchValue(this.productoEdit);
+  }
+  //submetodo RF2
+  private encodeImg(fileCapture:any){
+    this.encode64(fileCapture).then((imagen: any) => {
+      console.log(imagen);
+      this.imagenBase64 = imagen.base;
+    });
+  }
+
+  //Submetodo RF3
+   propProducto(){
+    return this.fb.group({
+      id: [''],
+      nombre: ['', Validators.required],
+      descripcion: ['', Validators.required],
+      cantidad: ['', Validators.required],
+      garantia: ['', Validators.required],
+      industria: ['', Validators.required],
+      marca: ['', Validators.required],
+      preciocompra: ['', [Validators.required, Validators.min(0)]],
+      precioventa: ['', [Validators.required, Validators.min(0)]],
+      sede: ['', Validators.required],
+      proveedor: ['', Validators.required],
+      imagen: [''],
+    });
   }
 }

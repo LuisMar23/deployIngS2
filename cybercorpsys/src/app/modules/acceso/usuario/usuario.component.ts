@@ -5,6 +5,8 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { UsuarioService } from '../../../core/services/usuario.service';
 import { AlertsService, IUsuario } from 'src/app/core/';
+import { DialogUsuarioComponent } from './dialog-usuario/dialog-usuario.component';
+import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
 
 @Component({
   selector: 'app-usuario',
@@ -29,13 +31,15 @@ export class UsuarioComponent implements OnInit {
 
   public form!: FormGroup;
   private id: number | undefined;
-
+  modalRef: MdbModalRef<
+    DialogUsuarioComponent | DialogUsuarioComponent
+  > | null = null;
   constructor(
     private usuarioService: UsuarioService,
-    private fb: FormBuilder,
-    private _alertServices: AlertsService
+    private _alertServices: AlertsService,
+    private modalService: MdbModalService,
   ) {
-    this.form = this.Formulario();
+   
   }
 
   ngOnInit(): void {
@@ -57,35 +61,7 @@ export class UsuarioComponent implements OnInit {
       this.dataSource.data = data;
     });
   }
-  registrar(): void {
-    const proveedor: IUsuario = this.form.value;
-    if (this.id == undefined) {
-      this.usuarioService.agregarUsuario(proveedor).subscribe(
-        (resp) => {
-          this.listarUsuarios();
-          this._alertServices.alertSucces('Usuario registrado');
-          this.form.reset();
-        },
-        (errors) => {
-          this._alertServices.alertError('A ocurrido un error');
-        }
-      );
-    } else {
-      this.id = undefined;
-      // this.usuarioService.editarProveedor(proveedor, this.id).subscribe(
-      //   (res) => {
-      //     this.form.reset();
-      //     this.id = undefined;
-      //     this._alertServices.alertSucces('Proveedor modificado');
-      //     this.listarProveedor();
-      //   },
-      //   (errors) => {
-      //     console.log(errors);
-      //     this._alertServices.alertError('A ocurrido un error!');
-      //   }
-      // );
-    }
-  }
+ 
   modificarEstado(id: number, accion: number) {
     this.usuarioService.modificarEstadoUsuario(id, accion).subscribe({
       next: (resp) => this.listarUsuarios(),
@@ -95,13 +71,35 @@ export class UsuarioComponent implements OnInit {
   getUserAuth(){
     return this.usuarioService.getUser();
   }
-  private Formulario() {
-    this.fb.group({
-      nombre: ['', Validators.required],
-      apellido: ['', Validators.required],
-      username: ['', Validators.required],
-      password: ['', Validators.required],
-      usertype: ['', Validators.required],
+
+
+  openDialog() {
+    this.modalRef = this.modalService.open(DialogUsuarioComponent, {
+      modalClass: 'modal-lg',
+    });
+    this.modalRef.onClose.subscribe({
+      next: (response: IUsuario) => {
+        if (response) this.listarUsuarios();
+      },
+    });
+  }
+
+  openDialogForEdit(usuario: IUsuario) {
+    this.modalRef = this.modalService.open(DialogUsuarioComponent, {
+      modalClass: 'modal-lg',
+      data: { usuarioEdit: usuario },
+    });
+    this.modalRef.onClose.subscribe({
+      next: (response: IUsuario) => {
+        if (response) this.listarUsuarios();
+      },
+    });
+  }
+
+  openDialogForDetail(usuario: IUsuario) {
+    this.modalRef = this.modalService.open(DialogUsuarioComponent, {
+      modalClass: 'modal-dialog-centered',
+      data: { usuario: usuario },
     });
   }
 }
