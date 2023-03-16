@@ -36,9 +36,9 @@ urlpatterns = [
     #     "auth/token/refresh/", TokenRefreshView.as_view(), name="token_refresh"
     # ),
     # path("auth/token/verify/", TokenVerifyView.as_view(), name="token_verify"),
-    path("inventario/", include('app.inventario.api.routers')),
+    path("inventory/", include('app.inventory.api.routers')),
     path('almacen/', include('app.almacen.api.routers')),
-    path('usuario/', include('app.usuario.api.routers')),
+    path('users/', include('app.users.api.routers')),
     path('auth/', include('app.authentication.api.routers'))
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

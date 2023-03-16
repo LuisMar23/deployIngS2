@@ -36,14 +36,14 @@ THIRD_APPS = [
     "drf_yasg",
     'rest_framework_roles'
 ]
-REST_FRAMEWORK_ROLES  =  { 
-  'ROLES': 'app.usuario.api.roles.ROLES' , 
+REST_FRAMEWORK_ROLES  =  {
+  'ROLES': 'app.users.api.roles.ROLES' ,
 }
 # Locals applications definition
 
 LOCAL_APPS = [
-    "app.inventario",
-    "app.usuario",
+    "app.inventory",
+    "app.users",
     "app.almacen",
     'app.authentication'
 ]
@@ -133,7 +133,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-AUTH_USER_MODEL = "usuario.Usuario"
+AUTH_USER_MODEL = "users.User"
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/

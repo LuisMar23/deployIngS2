@@ -4,7 +4,7 @@ import { MdbModalRef } from 'mdb-angular-ui-kit/modal';
 import { ProveedorService, AlertsService, IProveedor } from 'src/app/core';
 
 @Component({
-  selector: 'app-dialog-proveedor',
+  selector: 'app-dialog-supplier',
   templateUrl: './dialog-proveedor.component.html',
   styleUrls: ['./dialog-proveedor.component.css'],
 })
@@ -61,7 +61,7 @@ export class DialogProveedorComponent implements OnInit {
       },
     });
   }
-  private setForm() {  
+  private setForm() {
     this.form.patchValue(this.proveedorEdit);
   }
   private formulario() {

@@ -8,7 +8,7 @@ const routes: Routes = [
       import('./modules/auth/auth.module').then((m) => m.AuthModule),
   },
   {
-    path: 'inventario',
+    path: 'inventory',
     loadChildren: () =>
       import('./modules/inventario/inventario.module').then(
         (m) => m.InventarioModule

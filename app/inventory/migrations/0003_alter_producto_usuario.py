@@ -9,13 +9,13 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ("inventario", "0002_producto_imagen"),
+        ("inventory", "0002_producto_imagen"),
     ]
 
     operations = [
         migrations.AlterField(
             model_name="producto",
-            name="usuario",
+            name="users",
             field=models.ForeignKey(
                 blank=True,
                 null=True,

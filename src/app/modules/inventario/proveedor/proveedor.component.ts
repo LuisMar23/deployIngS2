@@ -7,7 +7,7 @@ import { IProveedor, ProveedorService } from 'src/app/core/';
 import { DialogProveedorComponent } from './dialog-proveedor/dialog-proveedor.component';
 
 @Component({
-  selector: 'app-proveedor',
+  selector: 'app-supplier',
   templateUrl: './proveedor.component.html',
   styleUrls: ['./proveedor.component.css'],
 })

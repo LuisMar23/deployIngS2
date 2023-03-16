@@ -9,7 +9,7 @@ import { DialogUsuarioComponent } from './dialog-usuario/dialog-usuario.componen
 import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
 
 @Component({
-  selector: 'app-usuario',
+  selector: 'app-users',
   templateUrl: './usuario.component.html',
   styleUrls: ['./usuario.component.css'],
 })
@@ -39,7 +39,7 @@ export class UsuarioComponent implements OnInit {
     private _alertServices: AlertsService,
     private modalService: MdbModalService,
   ) {
-   
+
   }
 
   ngOnInit(): void {
@@ -61,7 +61,7 @@ export class UsuarioComponent implements OnInit {
       this.dataSource.data = data;
     });
   }
- 
+
   modificarEstado(id: number, accion: number) {
     this.usuarioService.modificarEstadoUsuario(id, accion).subscribe({
       next: (resp) => this.listarUsuarios(),

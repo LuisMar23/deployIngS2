@@ -25,13 +25,13 @@ class Migration(migrations.Migration):
                     ),
                 ),
                 (
-                    "nombre",
+                    "name",
                     models.CharField(
                         max_length=50, unique=True, verbose_name="Nombre Rol"
                     ),
                 ),
                 (
-                    "descripcion",
+                    "description",
                     models.CharField(max_length=100, verbose_name="Descripcion"),
                 ),
                 ("estado", models.BooleanField(default=True, verbose_name="Estado")),
@@ -73,8 +73,8 @@ class Migration(migrations.Migration):
                         max_length=50, unique=True, verbose_name="Usuario"
                     ),
                 ),
-                ("nombre", models.CharField(max_length=50, verbose_name="Nombres")),
-                ("apellido", models.CharField(max_length=70, verbose_name="Apellidos")),
+                ("name", models.CharField(max_length=50, verbose_name="Nombres")),
+                ("last_name", models.CharField(max_length=70, verbose_name="Apellidos")),
                 ("is_active", models.BooleanField(default=True)),
                 ("is_staff", models.BooleanField(default=False)),
                 (
@@ -112,7 +112,7 @@ class Migration(migrations.Migration):
                 ),
             ],
             options={
-                "db_table": "usuario",
+                "db_table": "users",
             },
         ),
     ]

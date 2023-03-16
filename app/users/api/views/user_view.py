@@ -3,7 +3,7 @@ from rest_framework import viewsets
 from rest_framework.response import Response
 
 from ..serializers import UserCreateSerializer, UserListSerializer
-from app.usuario.models import Usuario
+from app.users.models import User
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -30,7 +30,7 @@ class UserViewSet(viewsets.ModelViewSet):
 
     def destroy(self, request, pk):
         estado = int(request.query_params.get("accion"))
-        usuario = get_object_or_404(Usuario, pk=pk)
+        usuario = get_object_or_404(User, pk=pk)
         usuario.is_active = estado
         usuario.save()
         return Response({"estado": estado})

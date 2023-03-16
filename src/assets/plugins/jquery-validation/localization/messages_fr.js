@@ -40,7 +40,7 @@ $.extend( $.validator.messages, {
 	lettersonly: "Veuillez fournir seulement des lettres.",
 	nowhitespace: "Veuillez ne pas inscrire d'espaces blancs.",
 	ziprange: "Veuillez fournir un code postal entre 902xx-xxxx et 905-xx-xxxx.",
-	integer: "Veuillez fournir un nombre non décimal qui est positif ou négatif.",
+	integer: "Veuillez fournir un name non décimal qui est positif ou négatif.",
 	vinUS: "Veuillez fournir un numéro d'identification du véhicule (VIN).",
 	dateITA: "Veuillez fournir une date valide.",
 	time: "Veuillez fournir une heure valide entre 00:00 et 23:59.",
