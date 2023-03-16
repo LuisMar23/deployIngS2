@@ -61,23 +61,23 @@
                 </ng-container>
 
                 <!-- Weight Column -->
-                <ng-container matColumnDef="nombre">
+                <ng-container matColumnDef="name">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header>
                     Nombre
                   </th>
                   <td mat-cell *matCellDef="let element">
-                    {{ element.nombre }}
+                    {{ element.name }}
                   </td>
                 </ng-container>
                 c
 
                 <!-- Weight Column -->
-                <ng-container matColumnDef="industria">
+                <ng-container matColumnDef="industry">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header>
                     Industria
                   </th>
                   <td mat-cell *matCellDef="let element">
-                    {{ element.industria }}
+                    {{ element.industry }}
                   </td>
                 </ng-container>
 
@@ -92,49 +92,49 @@
                 </ng-container>
 
                 <!-- Weight Column -->
-                <ng-container matColumnDef="cantidad">
+                <ng-container matColumnDef="stock">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header>
                     Cantidad
                   </th>
                   <td mat-cell *matCellDef="let element">
-                    {{ element.cantidad }}
+                    {{ element.stock }}
                   </td>
                 </ng-container>
 
                 <!-- Weight Column -->
-                <ng-container matColumnDef="proveedor">
+                <ng-container matColumnDef="supplier">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header>
                     Proveedor
                   </th>
                   <td mat-cell *matCellDef="let element">
-                    {{ element.proveedor }}
+                    {{ element.supplier }}
                   </td>
                 </ng-container>
 
                 <!-- Weight Column -->
-                <ng-container matColumnDef="sede">
+                <ng-container matColumnDef="branchOffice">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header>
                     Sede
                   </th>
                   <td mat-cell *matCellDef="let element">
-                    {{ element.sede }}
+                    {{ element.branchOffice }}
                   </td>
                 </ng-container>
 
                 <!-- Weight Column -->
-                <ng-container matColumnDef="estado">
+                <ng-container matColumnDef="is_active">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header>
                     Estado
                   </th>
                   <td mat-cell *matCellDef="let element">
                     <span
                       class="badge text-bg-success"
-                      *ngIf="element.estado == true"
+                      *ngIf="element.is_active == true"
                       >Activado</span
                     >
                     <span
                       class="badge text-bg-danger"
-                      *ngIf="element.estado == false"
+                      *ngIf="element.is_active == false"
                       >Desactivado</span
                     >
                   </td>
@@ -154,14 +154,14 @@
                     <button
                       (click)="modificarEstado(element.id, 0)"
                       class="btn btn-danger"
-                      *ngIf="element.estado == 1"
+                      *ngIf="element.is_active == 1"
                     >
                       <i class="fa fa-trash"> </i>
                     </button>
                     <button
                       (click)="modificarEstado(element.id, 1)"
                       class="btn btn-success"
-                      *ngIf="element.estado == 0"
+                      *ngIf="element.is_active == 0"
                     >
                       <i class="fa fa-check"> </i>
                     </button>

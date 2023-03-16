@@ -65,12 +65,12 @@ export class DialogProveedorComponent implements OnInit {
     this.form.patchValue(this.proveedorEdit);
   }
   private formulario() {
-    this.fb.group({
+    return this.fb.group({
       id:[''],
-      nombre: ['', Validators.required],
-      contacto: ['', Validators.required],
-      correo: ['', Validators.required],
-      direccion: ['', Validators.required],
+      name: ['', Validators.required],
+      phone_number: ['', Validators.required],
+      email_address: ['', Validators.required],
+      address: ['', Validators.required],
     });
   }
 }

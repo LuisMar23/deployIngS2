@@ -1,7 +1,7 @@
-export interface IUsuario{
+export interface User{
     id: number,
-    nombre:string,
-    apellido:string,
+    name:string,
+    last_name:string,
     username:string,
     usertype:string,
     is_active: boolean,

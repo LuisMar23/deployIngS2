@@ -1,8 +1,8 @@
 export interface IProveedor{
     id:number,
-    nombre:string,
-    contacto:string,
-    correo:string,
-    direccion:string,
-    estado:boolean,
+    name:string,
+    phone_number:string,
+    email_address:string,
+    address:string,
+    is_active:boolean,
 }

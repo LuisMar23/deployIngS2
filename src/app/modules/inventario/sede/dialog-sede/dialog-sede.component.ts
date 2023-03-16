@@ -65,9 +65,9 @@ export class DialogSedeComponent implements OnInit {
     this.form.patchValue(this.sedeEdit);
   }
   private formulario(){
-    this.fb.group({
+    return this.fb.group({
       id: [''],
-      nombre: ['', [Validators.required]],
+      name: ['', [Validators.required]],
     });
   }
 }

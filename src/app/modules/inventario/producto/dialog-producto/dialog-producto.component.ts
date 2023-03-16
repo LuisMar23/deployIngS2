@@ -49,8 +49,8 @@ export class DialogProductoComponent implements OnInit {
 
   submitProducto() {
     const producto: IProducto = this.form.value;
-    producto.imagen = this.imagenBase64;
-    producto.usuario = 1;
+    producto.image = this.imagenBase64;
+    producto.user = 1;
     if (!this.productoEdit) {
       this.addProducto(producto);
     } else {
@@ -119,14 +119,14 @@ export class DialogProductoComponent implements OnInit {
   private listarSede(): void {
     this._sedeService.listarSede().subscribe({
       next: (data) => {
-        this.sedes = data.filter((sede) => sede.estado == true);
+        this.sedes = data.filter((sede) => sede.is_active == true);
       },
     });
   }
   private listarProveedor(): void {
     this._proveedorService.listarProveedores().subscribe({
       next: (data) => {
-        this.proveedores = data.filter((proveedor) => proveedor.estado == true);
+        this.proveedores = data.filter((proveedor) => proveedor.is_active == true);
       },
     });
   }
@@ -145,17 +145,17 @@ export class DialogProductoComponent implements OnInit {
    propProducto(){
     return this.fb.group({
       id: [''],
-      nombre: ['', Validators.required],
-      descripcion: ['', Validators.required],
-      cantidad: ['', Validators.required],
-      garantia: ['', Validators.required],
-      industria: ['', Validators.required],
+      name: ['', Validators.required],
+      description: ['', Validators.required],
+      stock: ['', Validators.required],
+      assurance_months: ['', Validators.required],
+      industry: ['', Validators.required],
       marca: ['', Validators.required],
-      preciocompra: ['', [Validators.required, Validators.min(0)]],
-      precioventa: ['', [Validators.required, Validators.min(0)]],
-      sede: ['', Validators.required],
-      proveedor: ['', Validators.required],
-      imagen: [''],
+      purchase_price: ['', [Validators.required, Validators.min(0)]],
+      selling_price: ['', [Validators.required, Validators.min(0)]],
+      branchOffice: ['', Validators.required],
+      supplier: ['', Validators.required],
+      image: [''],
     });
   }
 }

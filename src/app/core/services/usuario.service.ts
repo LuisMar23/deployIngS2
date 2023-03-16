@@ -4,7 +4,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { map, Observable, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { IResponse } from '../interfaces/response';
-import { IUsuario } from '../interfaces/usuario';
+import { User } from '../interfaces/usuario';
 import { InterceptorService } from './interceptor.service';
 
 @Injectable({
@@ -23,8 +23,8 @@ export class UsuarioService {
     return this.httpClient
       .get<IResponse>(`${environment.API_URL}/usuario/usuario/`,{ headers: this.interceptor.getHeaders() });
   }
-  agregarUsuario(usuario: IUsuario): Observable<IUsuario> {
-    return this.httpClient.post<IUsuario>(
+  agregarUsuario(usuario: User): Observable<User> {
+    return this.httpClient.post<User>(
       `${environment.API_URL}/usuario/usuario/`,
       usuario,
       { headers: this.interceptor.getHeaders() }

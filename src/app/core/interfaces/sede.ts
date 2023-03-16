@@ -1,5 +1,5 @@
 export interface ISede{
     id: number, 
-    nombre:string,
-    estado:boolean
+    name:string,
+    is_active:boolean
 }

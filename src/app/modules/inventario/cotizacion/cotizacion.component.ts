@@ -80,10 +80,10 @@ export class CotizacionComponent implements OnInit, AfterViewInit {
   private construirDetalleProducto(value:IProducto) {
     return this.fb.group({
       codigo: [value.id?.toString(), Validators.required],
-      descripcion: [value.descripcion, Validators.required],
-      producto: [value.nombre, Validators.required],
+      descripcion: [value.description, Validators.required],
+      producto: [value.name, Validators.required],
       unidadMedida: ['EQUIPO', Validators.required],
-      precio: [value.precioventa.toString(), Validators.required],
+      precio: [value.selling_price.toString(), Validators.required],
     });
   }
   getForm() {
@@ -92,7 +92,7 @@ export class CotizacionComponent implements OnInit, AfterViewInit {
   private listarProducto() {
     this._productoService.listarProductos().subscribe((data: IProducto[]) => {
       this.dataSource.data = data.filter(
-        (producto) => producto.estado == true && producto.cantidad > 0
+        (producto) => producto.is_active == true && producto.stock > 0
       );
     });
   }

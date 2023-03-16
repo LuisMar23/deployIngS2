@@ -8,14 +8,14 @@
   ></button>
 </div>
 <div class="modal-body">
-    <p>Descripcion: {{ producto.descripcion }}</p>
-    <p>Industria: {{ producto.industria }}</p>
-    <p>Stock: {{ producto.cantidad }}</p>
+    <p>Descripcion: {{ producto.description }}</p>
+    <p>Industria: {{ producto.industry }}</p>
+    <p>Stock: {{ producto.stock }}</p>
     <p>Marca: {{ producto.marca }}</p>
-    <p>Garantia: {{ producto.garantia }}</p>
-    <p>Precio compra: {{ producto.preciocompra }}</p>
-    <p>Precio venta: {{ producto.precioventa }}</p>
-    <p>Proveedor: {{ producto.proveedor }}</p>
-    <p>Sede: {{ producto.sede }}</p>
-    <p><img [src]="producto.imagen" height="150px" width="150px" alt=""></p>
+    <p>Garantia: {{ producto.assurance_months }}</p>
+    <p>Precio compra: {{ producto.purchase_price }}</p>
+    <p>Precio venta: {{ producto.selling_price }}</p>
+    <p>Proveedor: {{ producto.supplier }}</p>
+    <p>Sede: {{ producto.branchOffice }}</p>
+    <p><img [src]="producto.image" height="150px" width="150px" alt=""></p>
 </div>

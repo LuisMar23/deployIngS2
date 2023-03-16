@@ -14,11 +14,11 @@ import { DialogProveedorComponent } from './dialog-proveedor/dialog-proveedor.co
 export class ProveedorComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = [
     'id',
-    'nombre',
-    'contacto',
-    'correo',
-    'direccion',
-    'estado',
+    'name',
+    'phone_number',
+    'email_address',
+    'address',
+    'is_active',
     'opciones',
   ];
   private proveedores!: IProveedor[];

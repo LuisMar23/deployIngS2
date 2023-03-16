@@ -4,7 +4,7 @@ import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 import { IJWTResponse } from '../interfaces/jwt.interface';
 import { CookieService } from 'ngx-cookie-service';
-import { IUsuario } from '../interfaces/usuario';
+import { User } from '../interfaces/usuario';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +16,7 @@ export class AuthService {
   ) {}
 
 
-  authToken(user: IUsuario): Observable<IJWTResponse> {
+  authToken(user: User): Observable<IJWTResponse> {
     return this.httpClient.post<IJWTResponse>(
       `${environment.API_URL}/auth/auth/login/`,
       user, {headers:this.getHeaders()}

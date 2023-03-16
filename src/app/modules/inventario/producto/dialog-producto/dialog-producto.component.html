@@ -18,7 +18,7 @@
             type="text"
             placeholder="Nombre"
             class="form-control mb-2"
-            formControlName="nombre"
+            formControlName="name"
           />
         </div>
       </div>
@@ -29,7 +29,7 @@
             type="text"
             placeholder="Descripcion"
             class="form-control mb-2"
-            formControlName="descripcion"
+            formControlName="description"
           />
         </div>
       </div>
@@ -42,7 +42,7 @@
             type="text"
             placeholder="Industria.."
             class="form-control mb-2 col-5"
-            formControlName="industria"
+            formControlName="industry"
           />
         </div>
       </div>
@@ -64,7 +64,7 @@
         <input
           type="number"
           class="form-control mb-2 col-5"
-          formControlName="cantidad"
+          formControlName="stock"
         />
       </div>
       <div class="col-lg-6">
@@ -72,7 +72,7 @@
         <input
           type="number"
           class="form-control mb-2 col-5"
-          formControlName="preciocompra"
+          formControlName="purchase_price"
         />
       </div>
     </div>
@@ -82,7 +82,7 @@
         <input
           type="number"
           class="form-control col-5 mb-2"
-          formControlName="garantia"
+          formControlName="assurance_months"
         />
       </div>
       <div class="col-lg-6">
@@ -90,30 +90,30 @@
         <input
           type="number"
           class="form-control col-5 mb-2"
-          formControlName="precioventa"
+          formControlName="selling_price"
         />
       </div>
     </div>
     <div class="row">
       <div class="col-lg-6">
         <label>Sede(*)</label>
-        <select formControlName="sede" class="form-control mb-2">
+        <select formControlName="branchOffice" class="form-control mb-2">
           <option 
           *ngFor="let sede of sedes;"
           [value]="sede.id"
           >
-          {{sede.nombre}}
+          {{sede.name}}
           </option>
         </select>
       </div>
       <div class="col-lg-6">
         <label>Proveedor(*)</label>
-        <select formControlName="proveedor" class="form-control mb-2">
+        <select formControlName="supplier" class="form-control mb-2">
           <option 
           *ngFor="let proveedor of proveedores;"
           [value]="proveedor.id"
           >
-          {{proveedor.nombre}}
+          {{proveedor.name}}
           </option>
         </select>
       </div>
