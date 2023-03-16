@@ -9,7 +9,7 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ("inventario", "0001_initial"),
+        ("inventory", "0001_initial"),
     ]
 
     operations = [
@@ -25,7 +25,7 @@ class Migration(migrations.Migration):
                         verbose_name="ID",
                     ),
                 ),
-                ("cantidad", models.PositiveIntegerField(verbose_name="Cantidad")),
+                ("stock", models.PositiveIntegerField(verbose_name="Cantidad")),
             ],
             options={
                 "db_table": "detalle_egreso",
@@ -44,7 +44,7 @@ class Migration(migrations.Migration):
                     ),
                 ),
                 (
-                    "fecha_registro",
+                    "date_created",
                     models.DateTimeField(
                         auto_now_add=True, verbose_name="Fecha Registro"
                     ),
@@ -52,7 +52,7 @@ class Migration(migrations.Migration):
                 (
                     "detalle_egresos",
                     models.ManyToManyField(
-                        through="almacen.DetalleEgreso", to="inventario.producto"
+                        through="almacen.DetalleEgreso", to="inventory.producto"
                     ),
                 ),
             ],
@@ -68,7 +68,7 @@ class Migration(migrations.Migration):
             model_name="detalleegreso",
             name="producto",
             field=models.ForeignKey(
-                on_delete=django.db.models.deletion.CASCADE, to="inventario.producto"
+                on_delete=django.db.models.deletion.CASCADE, to="inventory.producto"
             ),
         ),
     ]

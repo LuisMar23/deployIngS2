@@ -6,7 +6,7 @@ from rest_framework import viewsets, status, serializers
 from rest_framework.decorators import action
 from rest_framework.response import Response
 
-from app.inventario.models import Supplier, BranchOffice
+from app.inventory.models import Supplier, BranchOffice
 
 from ..serializers import ProductoCreateSerializer, ProductoListarSerializer, UploadExcelSerializer
 from ...models import Product
@@ -48,7 +48,7 @@ class ProductoViewSet(viewsets.ModelViewSet):
             sede = get_object_or_404(BranchOffice, pk=data['sede'])
             productos.append(Product(
                 proveedor=proveedor, sede=sede, nombre=data['name'],
-                descripcion=data['description'],cantidad=data['cantidad'],
+                descripcion=data['description'],cantidad=data['stock'],
                 preciocompra=data['preciocompra'], precioventa=data['precioventa'],
                 industria=data['industria'], garantia=data['garantia'], marca=data['marca']
                 ))

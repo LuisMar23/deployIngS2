@@ -17,7 +17,7 @@ export class SedeService {
   listarSede(): Observable<ISede[]> {
     return this.http
       .get<ISede[]>(`${environment.API_URL}/inventario/sede/`, {headers: this.interceptor.getHeaders()});
-    // .get<IResponse>(`${environment.API_URL}/inventario/sede/`)
+    // .get<IResponse>(`${environment.API_URL}/inventory/sede/`)
     // .pipe(map((res) => {
     //   this.cantidadSede = res.count;
     //   return res.results;

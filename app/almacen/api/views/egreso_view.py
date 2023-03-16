@@ -7,7 +7,7 @@ from rest_framework.response import Response
 from ...models.Egreso import Egreso
 from ...models.DetalleEgreso import DetalleEgreso
 
-from app.inventario.models import Producto
+from app.inventory.models import Product
 from ..serializers import EgresoSerializer
 
 
@@ -26,14 +26,14 @@ class EgresoViewSet(viewsets.GenericViewSet):
         cantidad = []
         detalle_egresos = []
         for detalle in data:
-            producto = get_object_or_404(Producto, pk=int(detalle['producto']))
-            unidades = int(detalle['cantidad'])
-            if producto.cantidad > 0:
-                producto.cantidad -= unidades
+            producto = get_object_or_404(Product, pk=int(detalle['producto']))
+            unidades = int(detalle['stock'])
+            if producto.stock > 0:
+                producto.stock -= unidades
                 detalle_egreso = DetalleEgreso(producto=producto, egreso=egress, cantidad=unidades)
                 productos.append(producto)
                 cantidad.append(unidades)
                 detalle_egresos.append(detalle_egreso)
-        Producto.objects.bulk_update(productos, fields=['cantidad'])
+        Product.objects.bulk_update(productos, fields=['stock'])
         DetalleEgreso.objects.bulk_create(detalle_egresos)
         return Response({"accion": "Recibido"}, status=status.HTTP_200_OK)

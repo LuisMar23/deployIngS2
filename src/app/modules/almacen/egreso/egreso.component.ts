@@ -68,7 +68,7 @@ export class EgresoComponent implements OnInit, AfterViewInit {
       (data) => {
         console.log(data);
         this._alertService.alertSucces('Registro exitoso');
-        this._route.navigate(['/inventario/producto/']);
+        this._route.navigate(['/inventory/producto/']);
       },
       (error) => this._alertService.alertError('A ocurrido un problema')
     );

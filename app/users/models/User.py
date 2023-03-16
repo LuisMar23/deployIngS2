@@ -22,22 +22,22 @@ class UserManager(BaseUserManager):
 
 class User(AbstractBaseUser, PermissionsMixin):
     USERTYPE_CHOICES = (
-        ('admin', 'administrador'),
-        ('asesor', 'asesor'),
-        ('contador', 'contador')
+        ('admin', 'Administrator'),
+        ('assessor', 'Assessor'),
+        ('accountant', 'Accountant')
     )
-    username = models.CharField("Usuario", max_length=50, unique=True)
-    nombre = models.CharField("Nombres", max_length=50)
-    apellido = models.CharField("Apellidos", max_length=70)
+    username = models.CharField("User name", max_length=50, unique=True)
+    first_name = models.CharField("First name", max_length=50)
+    last_name = models.CharField("Last name", max_length=70)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     usertype = models.CharField(max_length=40, choices=USERTYPE_CHOICES)
     objects = UserManager()
     USERNAME_FIELD = "username"
-    REQUIRED_FIELDS = ["nombre", "apellido", "usertype"]
+    REQUIRED_FIELDS = ["first_name", "last_name", "usertype"]
 
     class Meta:
-        db_table = "usuario"
+        db_table = "users"
 
     def __str__(self) -> str:
         return self.username

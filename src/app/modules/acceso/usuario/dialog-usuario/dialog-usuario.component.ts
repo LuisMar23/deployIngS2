@@ -4,15 +4,15 @@ import { UsuarioService } from 'src/app/core/services/usuario.service';
 import { MdbModalRef } from 'mdb-angular-ui-kit/modal';
 import { FormBuilder, FormGroup,Validators } from '@angular/forms';
 @Component({
-  selector: 'app-dialog-usuario',
+  selector: 'app-dialog-users',
   templateUrl: './dialog-usuario.component.html',
   styleUrls: ['./dialog-usuario.component.css']
 })
 export class DialogUsuarioComponent implements OnInit {
-  //Luis Martinez RF1 
+  //Luis Martinez RF1
   public form!:FormGroup;
   usuarioEdit!: IUsuario;
-  constructor( 
+  constructor(
     private fb: FormBuilder,
     private usuarioService:UsuarioService,
     private _alertServices:AlertsService,

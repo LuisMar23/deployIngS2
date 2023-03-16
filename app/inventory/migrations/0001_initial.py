@@ -93,7 +93,7 @@ class Migration(migrations.Migration):
                     "description",
                     models.CharField(max_length=250, verbose_name="Descripcion"),
                 ),
-                ("cantidad", models.PositiveIntegerField(verbose_name="Cantidad")),
+                ("stock", models.PositiveIntegerField(verbose_name="Cantidad")),
                 ("preciocompra", models.FloatField(verbose_name="Precio de Compra")),
                 ("precioventa", models.FloatField(verbose_name="Precio venta")),
                 (
@@ -111,14 +111,14 @@ class Migration(migrations.Migration):
                     "supplier",
                     models.ForeignKey(
                         on_delete=django.db.models.deletion.CASCADE,
-                        to="inventario.supplier",
+                        to="inventory.supplier",
                     ),
                 ),
                 (
                     "sede",
                     models.ForeignKey(
                         on_delete=django.db.models.deletion.CASCADE,
-                        to="inventario.sede",
+                        to="inventory.sede",
                     ),
                 ),
                 (

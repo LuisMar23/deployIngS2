@@ -11,7 +11,7 @@ class UserListSerializer(serializers.ModelSerializer):
 class UserCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('username', 'password', 'nombre', 'apellido', 'usertype')
+        fields = ('username', 'password', 'name', 'last_name', 'usertype')
 
     def create(self, validated_data):
         if validated_data.get('usertype') == 'admin':

@@ -35,7 +35,7 @@ export class DialogProductoComponent implements OnInit {
     private _alertService: AlertsService
   ) {
     //Luis Martinez RF3
-    //Creaacion de un submetodo para las propiedades de producto que pueden aumentar a futuro lo que haria mas grande el codigo 
+    //Creaacion de un submetodo para las propiedades de producto que pueden aumentar a futuro lo que haria mas grande el codigo
     this.form = this.propProducto();
   }
 
@@ -69,7 +69,7 @@ export class DialogProductoComponent implements OnInit {
     this._productoService.agregarProducto(producto).subscribe({
       next: (response) => {
         console.log(response);
-        this._alertService.alertSucces('Producto Registrado');
+        this._alertService.alertSucces('Product Registrado');
         this.form.reset();
         this.modalRef.close(response);
       },
@@ -85,7 +85,7 @@ export class DialogProductoComponent implements OnInit {
     this._productoService.modificarProducto(producto).subscribe({
       next: (response) => {
         console.log(response);
-        this._alertService.alertSucces('Producto Actualizado');
+        this._alertService.alertSucces('Product Actualizado');
         this.form.reset();
         this.modalRef.close();
       },
@@ -112,7 +112,7 @@ export class DialogProductoComponent implements OnInit {
             base: null,
           });
         };
-        
+
       } catch (e) {}
     });
 
