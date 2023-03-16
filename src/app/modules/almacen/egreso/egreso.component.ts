@@ -81,7 +81,7 @@ export class EgresoComponent implements OnInit, AfterViewInit {
   private listarProducto() {
     this._productoService.listarProductos().subscribe((data: IProducto[]) => {
       this.dataSource.data = data.filter(
-        (producto) => producto.estado == true && producto.cantidad > 0
+        (producto) => producto.is_active == true && producto.stock > 0
       );
     });
   }
@@ -89,7 +89,7 @@ export class EgresoComponent implements OnInit, AfterViewInit {
   private construirDetalleProducto(value:IProducto) {
     return this.fb.group({
       cantidad: ['', Validators.required],
-      stock: [value.cantidad.toString(), Validators.required],
+      stock: [value.stock.toString(), Validators.required],
       producto: [value.id, [Validators.required, Validators.min(0)]],
     });
   }

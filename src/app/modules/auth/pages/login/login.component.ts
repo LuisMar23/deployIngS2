@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
-import { IUsuario,IJWTResponse,AuthService, AlertsService } from 'src/app/core';
+import { User,IJWTResponse,AuthService, AlertsService } from 'src/app/core';
 
 @Component({
   selector: 'app-login',
@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {}
   login(): void {
-    const user:IUsuario = this.form.value;
+    const user:User = this.form.value;
     this.authService.authToken(user).subscribe({next:(data) => {
       this.saveToken(data);
       this.route.navigate(['/home']);

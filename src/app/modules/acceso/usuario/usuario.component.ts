@@ -4,7 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { UsuarioService } from '../../../core/services/usuario.service';
-import { AlertsService, IUsuario } from 'src/app/core/';
+import { AlertsService, User } from 'src/app/core/';
 import { DialogUsuarioComponent } from './dialog-usuario/dialog-usuario.component';
 import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
 
@@ -24,8 +24,8 @@ export class UsuarioComponent implements OnInit {
     'opciones',
   ];
 
-  public usuarios!: IUsuario[];
-  dataSource = new MatTableDataSource<IUsuario>(this.usuarios);
+  public usuarios!: User[];
+  dataSource = new MatTableDataSource<User>(this.usuarios);
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
@@ -56,7 +56,7 @@ export class UsuarioComponent implements OnInit {
   }
 
   listarUsuarios(): void {
-    this.usuarioService.obtenerUsuarios().subscribe((data: IUsuario[]) => {
+    this.usuarioService.obtenerUsuarios().subscribe((data: User[]) => {
       console.log(data);
       this.dataSource.data = data;
     });
@@ -78,25 +78,25 @@ export class UsuarioComponent implements OnInit {
       modalClass: 'modal-lg',
     });
     this.modalRef.onClose.subscribe({
-      next: (response: IUsuario) => {
+      next: (response: User) => {
         if (response) this.listarUsuarios();
       },
     });
   }
 
-  openDialogForEdit(usuario: IUsuario) {
+  openDialogForEdit(usuario: User) {
     this.modalRef = this.modalService.open(DialogUsuarioComponent, {
       modalClass: 'modal-lg',
       data: { usuarioEdit: usuario },
     });
     this.modalRef.onClose.subscribe({
-      next: (response: IUsuario) => {
+      next: (response: User) => {
         if (response) this.listarUsuarios();
       },
     });
   }
 
-  openDialogForDetail(usuario: IUsuario) {
+  openDialogForDetail(usuario: User) {
     this.modalRef = this.modalService.open(DialogUsuarioComponent, {
       modalClass: 'modal-dialog-centered',
       data: { usuario: usuario },

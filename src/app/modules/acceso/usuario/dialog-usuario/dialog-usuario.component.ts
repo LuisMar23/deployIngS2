@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertsService, IUsuario } from 'src/app/core';
+import { AlertsService, User } from 'src/app/core';
 import { UsuarioService } from 'src/app/core/services/usuario.service';
 import { MdbModalRef } from 'mdb-angular-ui-kit/modal';
 import { FormBuilder, FormGroup,Validators } from '@angular/forms';
@@ -11,7 +11,7 @@ import { FormBuilder, FormGroup,Validators } from '@angular/forms';
 export class DialogUsuarioComponent implements OnInit {
   //Luis Martinez RF1
   public form!:FormGroup;
-  usuarioEdit!: IUsuario;
+  usuarioEdit!: User;
   constructor(
     private fb: FormBuilder,
     private usuarioService:UsuarioService,
@@ -23,7 +23,7 @@ export class DialogUsuarioComponent implements OnInit {
   ngOnInit(): void {
   }
   registrar(): void {
-    const proveedor: IUsuario = this.form.value;
+    const proveedor: User = this.form.value;
     this.usuarioService.agregarUsuario(proveedor).subscribe(
       (resp) => {
         this._alertServices.alertSucces('Usuario registrado');

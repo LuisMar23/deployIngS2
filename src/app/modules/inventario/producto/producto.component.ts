@@ -19,13 +19,13 @@ import * as XLSX from 'xlsx';
 export class ProductoComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = [
     'id',
-    'nombre',
-    'industria',
+    'name',
+    'industry',
     'marca',
-    'cantidad',
-    'proveedor',
-    'sede',
-    'estado',
+    'stock',
+    'supplier',
+    'branchOffice',
+    'is_active',
     'opciones',
   ];
   private productos!: IProducto[];

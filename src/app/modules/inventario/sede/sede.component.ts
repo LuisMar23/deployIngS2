@@ -13,7 +13,7 @@ import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
   styleUrls: ['./sede.component.css'],
 })
 export class SedeComponent implements OnInit, AfterViewInit {
-  displayedColumns: string[] = ['id', 'nombre', 'estado', 'opciones'];
+  displayedColumns: string[] = ['id', 'name', 'is_active', 'opciones'];
   private listaSedes!: ISede[];
   dataSource = new MatTableDataSource<ISede>(this.listaSedes);
 

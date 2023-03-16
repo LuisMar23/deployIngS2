@@ -1,16 +1,16 @@
 export interface IProducto{
     id?:number,
-    nombre:string,
-    descripcion:string,
-    cantidad:number,
-    preciocompra:number,
-    industria:string,
-    garantia:string,
+    name:string,
+    description:string,
+    stock:number,
+    purchase_price:number,
+    industry:string,
+    assurance_months:string,
     marca:string,
-    imagen: string,
-    estado:boolean,
-    precioventa:number | string,
-    proveedor:number | string,
-    sede:number | string
-    usuario:number | string
+    image: string,
+    is_active:boolean,
+    selling_price:number | string,
+    supplier:number | string,
+    branchOffice:number | string
+    user:number | string
 }
