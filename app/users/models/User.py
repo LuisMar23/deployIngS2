@@ -2,7 +2,8 @@ from django.db import models
 
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser, PermissionsMixin
 
-class UsuarioManager(BaseUserManager):
+
+class UserManager(BaseUserManager):
     def create_user(self, username, password=None, **kwargs):
         user = self.model(username=username, **kwargs)
         user.set_password(password)
@@ -19,7 +20,7 @@ class UsuarioManager(BaseUserManager):
         return user
 
 
-class Usuario(AbstractBaseUser, PermissionsMixin):
+class User(AbstractBaseUser, PermissionsMixin):
     USERTYPE_CHOICES = (
         ('admin', 'administrador'),
         ('asesor', 'asesor'),
@@ -31,7 +32,7 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     usertype = models.CharField(max_length=40, choices=USERTYPE_CHOICES)
-    objects = UsuarioManager()
+    objects = UserManager()
     USERNAME_FIELD = "username"
     REQUIRED_FIELDS = ["nombre", "apellido", "usertype"]
 
@@ -40,4 +41,3 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self) -> str:
         return self.username
-

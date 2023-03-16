@@ -15,7 +15,7 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AlterField(
             model_name="producto",
-            name="usuario",
+            name="users",
             field=models.ForeignKey(
                 blank=True,
                 null=True,

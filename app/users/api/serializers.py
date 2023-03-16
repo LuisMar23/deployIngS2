@@ -1,19 +1,19 @@
 from rest_framework import serializers
-from ..models import Usuario
+from ..models import User
 
 
 class UserListSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Usuario
+        model = User
         exclude = ('password', 'last_login', 'is_superuser',)
 
 
 class UserCreateSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Usuario
+        model = User
         fields = ('username', 'password', 'nombre', 'apellido', 'usertype')
 
     def create(self, validated_data):
         if validated_data.get('usertype') == 'admin':
-            return Usuario.objects.create_superuser(**validated_data)
-        return Usuario.objects.create_user(**validated_data)
+            return User.objects.create_superuser(**validated_data)
+        return User.objects.create_user(**validated_data)

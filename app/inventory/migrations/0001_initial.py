@@ -26,7 +26,7 @@ class Migration(migrations.Migration):
                         verbose_name="ID",
                     ),
                 ),
-                ("nombre", models.CharField(max_length=150, verbose_name="Nombre")),
+                ("name", models.CharField(max_length=150, verbose_name="Nombre")),
                 ("contacto", models.CharField(max_length=50, verbose_name="Contacto")),
                 ("correo", models.EmailField(max_length=30, verbose_name="Correo")),
                 (
@@ -35,15 +35,15 @@ class Migration(migrations.Migration):
                 ),
                 ("estado", models.BooleanField(default=True)),
                 (
-                    "fecha_registro",
+                    "date_created",
                     models.DateField(auto_now_add=True, verbose_name="Registro"),
                 ),
             ],
             options={
                 "verbose_name": "Proveedor",
                 "verbose_name_plural": "Proveedores",
-                "db_table": "proveedor",
-                "ordering": ["fecha_registro"],
+                "db_table": "supplier",
+                "ordering": ["date_created"],
             },
         ),
         migrations.CreateModel(
@@ -59,12 +59,12 @@ class Migration(migrations.Migration):
                     ),
                 ),
                 (
-                    "nombre",
+                    "name",
                     models.CharField(max_length=100, unique=True, verbose_name="Sede"),
                 ),
                 ("estado", models.BooleanField(default=True, verbose_name="Estado")),
                 (
-                    "fecha_registro",
+                    "date_created",
                     models.DateTimeField(
                         auto_now_add=True, verbose_name="Date_Created"
                     ),
@@ -77,7 +77,7 @@ class Migration(migrations.Migration):
             },
         ),
         migrations.CreateModel(
-            name="Producto",
+            name="Product",
             fields=[
                 (
                     "id",
@@ -88,9 +88,9 @@ class Migration(migrations.Migration):
                         verbose_name="ID",
                     ),
                 ),
-                ("nombre", models.CharField(max_length=200, verbose_name="Producto")),
+                ("name", models.CharField(max_length=200, verbose_name="Product")),
                 (
-                    "descripcion",
+                    "description",
                     models.CharField(max_length=250, verbose_name="Descripcion"),
                 ),
                 ("cantidad", models.PositiveIntegerField(verbose_name="Cantidad")),
@@ -104,14 +104,14 @@ class Migration(migrations.Migration):
                 ("marca", models.CharField(max_length=60, verbose_name="Marca")),
                 ("estado", models.BooleanField(default=True)),
                 (
-                    "fecha_registro",
+                    "date_created",
                     models.DateField(auto_now_add=True, verbose_name="Registro"),
                 ),
                 (
-                    "proveedor",
+                    "supplier",
                     models.ForeignKey(
                         on_delete=django.db.models.deletion.CASCADE,
-                        to="inventario.proveedor",
+                        to="inventario.supplier",
                     ),
                 ),
                 (
@@ -122,7 +122,7 @@ class Migration(migrations.Migration):
                     ),
                 ),
                 (
-                    "usuario",
+                    "users",
                     models.ForeignKey(
                         on_delete=django.db.models.deletion.CASCADE,
                         to=settings.AUTH_USER_MODEL,
@@ -130,10 +130,10 @@ class Migration(migrations.Migration):
                 ),
             ],
             options={
-                "verbose_name": "Producto",
+                "verbose_name": "Product",
                 "verbose_name_plural": "Productos",
                 "db_table": "producto",
-                "ordering": ["fecha_registro"],
+                "ordering": ["date_created"],
             },
         ),
     ]

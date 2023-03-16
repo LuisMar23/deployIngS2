@@ -6,10 +6,10 @@ from rest_framework import viewsets, status, serializers
 from rest_framework.decorators import action
 from rest_framework.response import Response
 
-from app.inventario.models import Proveedor, Sede
+from app.inventario.models import Supplier, BranchOffice
 
 from ..serializers import ProductoCreateSerializer, ProductoListarSerializer, UploadExcelSerializer
-from ...models import Producto
+from ...models import Product
 
 
 class ProductoViewSet(viewsets.ModelViewSet):
@@ -35,8 +35,8 @@ class ProductoViewSet(viewsets.ModelViewSet):
 
     def destroy(self, request, pk):
         estado = int(request.query_params.get("accion"))
-        producto = get_object_or_404(Producto, pk=pk)
-        producto.estado = estado
+        producto = get_object_or_404(Product, pk=pk)
+        producto.is_active = estado
         producto.save()
         return Response({"estado": estado}, status=status.HTTP_200_OK)
 
@@ -44,13 +44,13 @@ class ProductoViewSet(viewsets.ModelViewSet):
     def uploadExcel(self, request):
         productos = []
         for data in request.data:
-            proveedor = get_object_or_404(Proveedor, pk=data['proveedor'])
-            sede = get_object_or_404(Sede, pk=data['sede'])
-            productos.append(Producto(
-                proveedor=proveedor, sede=sede, nombre=data['nombre'],
-                descripcion=data['descripcion'],cantidad=data['cantidad'],
+            proveedor = get_object_or_404(Supplier, pk=data['supplier'])
+            sede = get_object_or_404(BranchOffice, pk=data['sede'])
+            productos.append(Product(
+                proveedor=proveedor, sede=sede, nombre=data['name'],
+                descripcion=data['description'],cantidad=data['cantidad'],
                 preciocompra=data['preciocompra'], precioventa=data['precioventa'],
                 industria=data['industria'], garantia=data['garantia'], marca=data['marca']
                 ))
-        Producto.objects.bulk_create(productos)
+        Product.objects.bulk_create(productos)
         return Response({"massege": "enviado"})
