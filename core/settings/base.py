@@ -5,7 +5,6 @@ from datetime import timedelta
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
-
 SECRET_KEY = (
     "django-insecure-%9lbbj7)k-qm!%g3!qphdxtz(%@1j$2hws7h%ajza209mi4a05"
 )
@@ -36,8 +35,8 @@ THIRD_APPS = [
     "drf_yasg",
     'rest_framework_roles'
 ]
-REST_FRAMEWORK_ROLES  =  {
-  'ROLES': 'app.users.api.roles.ROLES' ,
+REST_FRAMEWORK_ROLES = {
+    'ROLES': 'app.users.api.roles.ROLES',
 }
 # Locals applications definition
 
@@ -48,10 +47,8 @@ LOCAL_APPS = [
     'app.authentication'
 ]
 
-
 # Application definition
 INSTALLED_APPS = DJANGO_APPS + LOCAL_APPS + THIRD_APPS
-
 
 # Middleware
 MIDDLEWARE = [
@@ -69,14 +66,13 @@ MIDDLEWARE = [
 
 REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": [
-        "rest_framework.permissions.IsAuthenticatedOrReadOnly"
+        "rest_framework.permissions.IsAuthenticatedOrReadOnly",
+        # "rest_framework.permissions.AllowAny"
     ],
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     )
 }
-
-
 
 AUTHENTICATION_BACKENDS = ("django.contrib.auth.backends.ModelBackend",)
 
@@ -145,7 +141,6 @@ TIME_ZONE = "UTC"
 USE_I18N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
