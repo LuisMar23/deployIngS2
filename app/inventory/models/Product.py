@@ -1,6 +1,5 @@
 from django.db import models
 # from django.contrib.auth import get_user_model
-from .Supplier import Supplier
 from .BranchOffice import BranchOffice
 from app.users.models.User import User
 
@@ -13,11 +12,10 @@ class Product(models.Model):
     selling_price = models.FloatField("Selling price")
     industry = models.CharField("Industry", max_length=50)
     assurance_months = models.PositiveIntegerField("Assurance months")
-    marca = models.CharField("Marca", max_length=60)
+    marca = models.CharField("Marca", max_length=60, null= True, blank=True)
     image = models.ImageField("Imagen", blank=True, null=True, upload_to="productos/")
     is_active = models.BooleanField(default=True)
     date_created = models.DateField("Registration date", auto_now_add=True)
-    supplier = models.ForeignKey(Supplier, on_delete=models.CASCADE)
     branchOffice = models.ForeignKey(BranchOffice, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
 
