@@ -27,17 +27,17 @@ class User(AbstractBaseUser, PermissionsMixin):
         ('accountant', 'Accountant')
     )
     username = models.CharField("User name", max_length=50, unique=True)
-    first_name = models.CharField("First name", max_length=50)
+    name = models.CharField("First name", max_length=50)
     last_name = models.CharField("Last name", max_length=70)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     usertype = models.CharField(max_length=40, choices=USERTYPE_CHOICES)
     objects = UserManager()
     USERNAME_FIELD = "username"
-    REQUIRED_FIELDS = ["first_name", "last_name", "usertype"]
+    REQUIRED_FIELDS = ["name", "last_name", "usertype"]
 
     class Meta:
-        db_table = "users"
+        db_table = "user"
 
     def __str__(self) -> str:
         return self.username

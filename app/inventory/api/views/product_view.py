@@ -8,15 +8,15 @@ from rest_framework.response import Response
 
 from app.inventory.models import Supplier, BranchOffice
 
-from ..serializers import ProductoCreateSerializer, ProductoListarSerializer, UploadExcelSerializer
+from ..serializers import ProductoCreateSerializer, ProductListSerializer, UploadExcelSerializer
 from ...models import Product
 
 
-class ProductoViewSet(viewsets.ModelViewSet):
+class ProductViewSet(viewsets.ModelViewSet):
     serializer_class = {
-        'list': ProductoListarSerializer,
+        'list': ProductListSerializer,
         'create': ProductoCreateSerializer,
-        'default': ProductoListarSerializer
+        'default': ProductListSerializer
     }
     queryset = None
 

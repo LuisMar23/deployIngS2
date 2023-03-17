@@ -9,7 +9,7 @@ from ..serializers import ProveedorSerializer
 from ...models import Supplier
 
 
-class ProveedorViewSet(viewsets.ModelViewSet):
+class SupplierViewSet(viewsets.ModelViewSet):
     serializer_class = ProveedorSerializer
     queryset = ProveedorSerializer.Meta.model.objects.all()
     view_permissions = {
