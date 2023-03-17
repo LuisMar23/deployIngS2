@@ -5,7 +5,7 @@ from ..serializers import SedeSerializer
 from ...models import BranchOffice
 
 
-class SedeViewSet(viewsets.ModelViewSet):
+class BranchOfficeViewSet(viewsets.ModelViewSet):
     serializer_class = SedeSerializer
     queryset = SedeSerializer.Meta.model.objects.all()
 

@@ -1,3 +1,5 @@
+from abc import ABC
+
 from rest_framework import serializers
 from drf_extra_fields.fields import Base64ImageField
 from ..models import BranchOffice, Product, Supplier
@@ -17,18 +19,30 @@ class SedeSerializer(serializers.ModelSerializer):
 
 class ProductoCreateSerializer(serializers.ModelSerializer):
     imagen = Base64ImageField(required=False)
+
     class Meta:
         model = Product
         fields = '__all__'
 
-class ProductoListarSerializer(serializers.ModelSerializer):
-    sede = serializers.StringRelatedField()
-    proveedor = serializers.StringRelatedField()
+
+class ProductSerializer(serializers.Serializer):
     class Meta:
         model = Product
-        exclude = ('users',)
+        fields = "__all__"
 
-class UploadExcelSerializer(serializers.ListField):
-    class Meta:
-        model=Product
-        fields='__all__'
+
+class ProductListSerializer(serializers.ListSerializer):
+    child = ProductSerializer()
+
+    def create(self, validated_data):
+        return [Product(**item) for item in validated_data]
+    # sede = serializers.StringRelatedField()
+    # proveedor = serializers.StringRelatedField()
+    #
+    # class Meta:
+    #     model = Product
+    #     exclude = ('user',)
+
+
+class UploadExcelSerializer(serializers.Serializer):
+    data = ProductListSerializer()

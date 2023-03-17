@@ -1,8 +1,8 @@
 from rest_framework.routers import DefaultRouter
-from .views import ProductoViewSet, ProveedorViewSet, SedeViewSet
+from .views import ProductViewSet, SupplierViewSet, BranchOfficeViewSet
 
 router = DefaultRouter()
-router.register(r'producto', ProductoViewSet, 'producto')
-router.register(r'supplier', ProveedorViewSet, 'supplier')
-router.register(r'sede', SedeViewSet, 'sede')
+router.register(r'producto', ProductViewSet, 'producto')
+router.register(r'supplier', SupplierViewSet, 'supplier')
+router.register(r'sede', BranchOfficeViewSet, 'sede')
 urlpatterns = router.urls
