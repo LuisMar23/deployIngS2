@@ -1,4 +1,4 @@
-from abc import ABC
+import abc
 
 from rest_framework import serializers
 from drf_extra_fields.fields import Base64ImageField
@@ -17,7 +17,7 @@ class SedeSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
-class ProductoCreateSerializer(serializers.ModelSerializer):
+class ProductCreateSerializer(serializers.ModelSerializer):
     imagen = Base64ImageField(required=False)
 
     class Meta:
@@ -25,7 +25,7 @@ class ProductoCreateSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class ProductSerializer(serializers.Serializer):
+class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
         fields = "__all__"
@@ -35,14 +35,9 @@ class ProductListSerializer(serializers.ListSerializer):
     child = ProductSerializer()
 
     def create(self, validated_data):
-        return [Product(**item) for item in validated_data]
-    # sede = serializers.StringRelatedField()
-    # proveedor = serializers.StringRelatedField()
-    #
-    # class Meta:
-    #     model = Product
-    #     exclude = ('user',)
-
+        products = [Product(**item) for item in validated_data]
+        Product.objects.bulk_create(products)
+        return products
 
 class UploadExcelSerializer(serializers.Serializer):
     data = ProductListSerializer()

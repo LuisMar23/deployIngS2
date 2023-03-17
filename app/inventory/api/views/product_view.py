@@ -1,22 +1,23 @@
-from typing import Dict
-
 from django.shortcuts import get_object_or_404
+from django.db import transaction
 
-from rest_framework import viewsets, status, serializers
+from rest_framework import viewsets, status
 from rest_framework.decorators import action
 from rest_framework.response import Response
+from rest_framework.request import Request
 
 from app.inventory.models import Supplier, BranchOffice
 
-from ..serializers import ProductoCreateSerializer, ProductListSerializer, UploadExcelSerializer
+from ..serializers import ProductCreateSerializer, ProductListSerializer, UploadExcelSerializer, ProductSerializer
 from ...models import Product
 
 
 class ProductViewSet(viewsets.ModelViewSet):
     serializer_class = {
-        'list': ProductListSerializer,
-        'create': ProductoCreateSerializer,
-        'default': ProductListSerializer
+        'list': ProductSerializer,
+        'create': ProductCreateSerializer,
+        'uploadExcel': UploadExcelSerializer,
+        'default': ProductSerializer
     }
     queryset = None
 
@@ -41,16 +42,14 @@ class ProductViewSet(viewsets.ModelViewSet):
         return Response({"estado": estado}, status=status.HTTP_200_OK)
 
     @action(detail=False, methods=['post'])
-    def uploadExcel(self, request):
-        productos = []
-        for data in request.data:
-            proveedor = get_object_or_404(Supplier, pk=data['supplier'])
-            sede = get_object_or_404(BranchOffice, pk=data['sede'])
-            productos.append(Product(
-                proveedor=proveedor, sede=sede, nombre=data['name'],
-                descripcion=data['description'],cantidad=data['stock'],
-                preciocompra=data['preciocompra'], precioventa=data['precioventa'],
-                industria=data['industria'], garantia=data['garantia'], marca=data['marca']
-                ))
-        Product.objects.bulk_create(productos)
-        return Response({"massege": "enviado"})
+    @transaction.atomic()
+    def uploadExcel(self, request: Request) -> Response:
+        try:
+            products_list_serializer = self.get_serializer_class()(data=request.data)
+            products_list_serializer.is_valid(raise_exception=True)
+            products_list_serializer.save()
+        except Exception as e:
+            transaction.set_rollback(True)
+            return Response({"error": f"{e}"}, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            return Response({"message": "Products created successfully"}, status=status.HTTP_200_OK)

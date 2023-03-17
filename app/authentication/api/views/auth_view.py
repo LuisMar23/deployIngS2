@@ -25,7 +25,6 @@ class AuthenticationViewSet(viewsets.GenericViewSet, TokenObtainPairView):
                 {
                     "access": login_serializer.validated_data.get('access'),
                     "refresh": login_serializer.validated_data.get('refresh'),
-                    "user": user_serializer.data,
                     "message": "Usuario autenticado correctamente"
                 },
                 status=status.HTTP_200_OK
