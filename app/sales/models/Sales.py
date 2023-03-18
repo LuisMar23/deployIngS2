@@ -20,4 +20,4 @@ class Sales(models.Model):
         verbose_name_plural = "Sales"
 
     def __str__(self) -> str:
-        return self.name
+        return self.receipt_type

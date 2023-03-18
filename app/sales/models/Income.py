@@ -2,7 +2,6 @@ from django.db import models
 from app.inventory.models import Product, Supplier
 
 
-
 class Income(models.Model):
     receipt_type = models.CharField("Receipt type", max_length=250)
     serial_number = models.PositiveIntegerField("Serial number")
@@ -20,4 +19,4 @@ class Income(models.Model):
         verbose_name_plural = "Incomes"
 
     def __str__(self) -> str:
-        return self.name
+        return f"Income {self.receipt_type}"

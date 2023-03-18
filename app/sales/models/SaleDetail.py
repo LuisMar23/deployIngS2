@@ -10,11 +10,10 @@ class SaleDetail(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     sale = models.ForeignKey(Sales, on_delete=models.CASCADE)
 
-
     class Meta:
         db_table = "sale_detail"
         verbose_name = "Sale Detail"
         verbose_name_plural = "Sale Detail"
 
     def __str__(self) -> str:
-        return self.name
+        return f"Sale detail {self.sale}"

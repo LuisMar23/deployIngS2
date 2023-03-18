@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from ..models import Egreso, DetalleEgreso
-from app.inventory.api.serializers import ProductCreateSerializer
+
 
 class EgresoSerializer(serializers.ModelSerializer):
     class Meta:

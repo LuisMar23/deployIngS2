@@ -8,15 +8,13 @@ from rest_framework.request import Request
 
 from app.inventory.models import Supplier, BranchOffice
 
-from ..serializers import ProductCreateSerializer, ProductListSerializer, UploadExcelSerializer, ProductSerializer
+from ..serializers import ProductListSerializer, ProductSerializer
 from ...models import Product
 
 
 class ProductViewSet(viewsets.ModelViewSet):
     serializer_class = {
-        'list': ProductSerializer,
-        'create': ProductCreateSerializer,
-        'uploadExcel': UploadExcelSerializer,
+        'uploadExcel': ProductListSerializer,
         'default': ProductSerializer
     }
     queryset = None
