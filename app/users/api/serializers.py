@@ -6,7 +6,7 @@ class UserListSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         exclude = ('password', 'last_login', 'is_superuser',)
-
+        # fields = ('username', 'password',)
 
 class UserCreateSerializer(serializers.ModelSerializer):
     class Meta:

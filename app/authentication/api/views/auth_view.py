@@ -17,20 +17,29 @@ class AuthenticationViewSet(viewsets.GenericViewSet, TokenObtainPairView):
     @action(detail=False, methods=['post'])
     def login(self, request):
         user = authenticate(request=request, **request.data)
-        try:
-            login_serializer = self.serializer_class(data=request.data)
-            login_serializer.is_valid(raise_exception=True)
+        if user is not None:
+            token_serializer = self.serializer_class(data=request.data)
+            token_serializer.is_valid(raise_exception=True)
             user_serializer = UserListSerializer(user)
-            return Response(
-                {
-                    "access": login_serializer.validated_data.get('access'),
-                    "refresh": login_serializer.validated_data.get('refresh'),
-                    "message": "Usuario autenticado correctamente"
-                },
-                status=status.HTTP_200_OK
-            )
-        except:
-            return Response({"message": "Credenciales invalidas"}, status=status.HTTP_401_UNAUTHORIZED)
+            print(user_serializer.data)
+            return Response({'message': 'user authenticated'})
+        return Response({'message': 'credential invalids'})
+        # try:
+        #     login_serializer = self.serializer_class(data=request.data)
+        #     login_serializer.is_valid(raise_exception=True)
+        #     user_serializer = UserListSerializer(user)
+        #     user_serializer.is_valid(raise_exception=True)
+        #     return Response(
+        #         {
+        #             "access": login_serializer.validated_data.get('access'),
+        #             "refresh": login_serializer.validated_data.get('refresh'),
+        #             "message": "Usuario autenticado correctamente",
+        #             "user": user_serializer.validated_data
+        #         },
+        #         status=status.HTTP_200_OK
+        #     )
+        # except:
+        #     return Response({"message": "Credenciales invalidas"}, status=status.HTTP_401_UNAUTHORIZED)
 
     @action(detail=False, methods=['post'])
     def logout(self, request):

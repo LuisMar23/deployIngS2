@@ -1,23 +1,22 @@
-from django.db import transaction
 
 from rest_framework import viewsets
 from rest_framework.request import Request
 from rest_framework.response import Response
 
+
 from ..serializers import SaleSerializer, SaleDetailCreate
 
 
 class SaleViewSet(viewsets.ModelViewSet):
+    http_method_names = ['get', 'post']
     serializer_class = {
         'list': SaleSerializer,
         'create': SaleDetailCreate,
         'default': SaleSerializer
     }
     view_permissions = {
-        'create,destroy,update,retrieve': {'admin': True, 'contador': True},
-        'list': {'admin': True, 'contador': True}
+        'create,list': {'admin': True, 'contador': True},
     }
-
     queryset = None
 
     def get_queryset(self):
@@ -32,3 +31,4 @@ class SaleViewSet(viewsets.ModelViewSet):
         sale_serializer.is_valid(raise_exception=True)
         sale_serializer.save()
         return Response({"message": "venta realizada con exito"})
+
