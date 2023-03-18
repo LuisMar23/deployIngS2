@@ -1,6 +1,6 @@
 from django.db import models
 from app.inventory.models import Product
-from .Income import Income 
+from .Income import Income
 
 
 class IncomeDetail(models.Model):
@@ -15,4 +15,4 @@ class IncomeDetail(models.Model):
         verbose_name_plural = "Income Detail"
 
     def __str__(self) -> str:
-        return self.name
+        return self.income

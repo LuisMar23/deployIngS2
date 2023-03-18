@@ -17,14 +17,6 @@ class SedeSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
-class ProductCreateSerializer(serializers.ModelSerializer):
-    imagen = Base64ImageField(required=False)
-
-    class Meta:
-        model = Product
-        fields = '__all__'
-
-
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
@@ -39,5 +31,4 @@ class ProductListSerializer(serializers.ListSerializer):
         Product.objects.bulk_create(products)
         return products
 
-class UploadExcelSerializer(serializers.Serializer):
-    data = ProductListSerializer()
+
