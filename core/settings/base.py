@@ -44,7 +44,8 @@ LOCAL_APPS = [
     "app.inventory",
     "app.users",
     "app.almacen",
-    'app.authentication'
+    'app.authentication',
+    'app.sales'
 ]
 
 # Application definition
