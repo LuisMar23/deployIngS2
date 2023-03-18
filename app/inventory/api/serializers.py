@@ -5,13 +5,13 @@ from drf_extra_fields.fields import Base64ImageField
 from ..models import BranchOffice, Product, Supplier
 
 
-class ProveedorSerializer(serializers.ModelSerializer):
+class SupplierSerializer(serializers.ModelSerializer):
     class Meta:
         model = Supplier
         fields = "__all__"
 
 
-class SedeSerializer(serializers.ModelSerializer):
+class BranchOfficeSerializer(serializers.ModelSerializer):
     class Meta:
         model = BranchOffice
         fields = "__all__"
@@ -30,5 +30,3 @@ class ProductListSerializer(serializers.ListSerializer):
         products = [Product(**item) for item in validated_data]
         Product.objects.bulk_create(products)
         return products
-
-

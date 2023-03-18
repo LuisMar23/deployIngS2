@@ -52,7 +52,7 @@ export class ProveedorComponent implements OnInit, AfterViewInit {
     this.modalRef.onClose.subscribe({
       next: (response) => {
         if(response)
-          this.listarProveedor();
+          this.proveedores.push(response);
       },
     });
   }
