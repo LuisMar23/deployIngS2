@@ -37,6 +37,7 @@ urlpatterns = [
     # ),
     # path("auth/token/verify/", TokenVerifyView.as_view(), name="token_verify"),
     path("inventory/", include('app.inventory.api.routers')),
+    path('sale/', include('app.sales.api.routers')),
     path('almacen/', include('app.almacen.api.routers')),
     path('users/', include('app.users.api.routers')),
     path('auth/', include('app.authentication.api.routers'))
