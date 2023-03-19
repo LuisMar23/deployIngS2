@@ -39,7 +39,7 @@ export class DialogProveedorComponent implements OnInit {
         console.log(response);
         this._alertService.alertSucces('Proveedor Registrado');
         this.form.reset();
-        this.modalRef.close(response);
+        this.modalRef.close(proveedor);
       },
       error: (error) => {
         console.log(error);

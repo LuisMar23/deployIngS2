@@ -50,9 +50,11 @@ export class ProveedorComponent implements OnInit, AfterViewInit {
       modalClass: 'modal-centred',
     });
     this.modalRef.onClose.subscribe({
-      next: (response) => {
-        if(response)
-          this.proveedores.push(response);
+      next: (response: IProveedor) => {
+        if(response){
+            this.dataSource.data = [...this.dataSource.data, response];
+
+        }
       },
     });
   }

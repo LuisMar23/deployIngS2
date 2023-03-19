@@ -20,6 +20,7 @@ class UserManager(BaseUserManager):
         return user
 
 
+
 class User(AbstractBaseUser, PermissionsMixin):
     USERTYPE_CHOICES = (
         ('admin', 'Administrator'),
