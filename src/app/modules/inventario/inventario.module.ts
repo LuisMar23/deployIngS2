@@ -16,6 +16,7 @@ import { MatInputModule } from '@angular/material/input';
 import { DialogProveedorComponent } from './proveedor/dialog-proveedor/dialog-proveedor.component';
 import { DialogSedeComponent } from './sede/dialog-sede/dialog-sede.component';
 import { DialogCotizacionComponent } from './cotizacion/dialog-cotizacion/dialog-cotizacion.component';
+import { VentasComponent } from './ventas/ventas.component';
 
 
 @NgModule({
@@ -24,11 +25,13 @@ import { DialogCotizacionComponent } from './cotizacion/dialog-cotizacion/dialog
     ProductoComponent,
     SedeComponent,
     CotizacionComponent,
+    VentasComponent,
     DialogProductoComponent,
     DialogDetalleComponent,
     DialogProveedorComponent,
     DialogSedeComponent,
     DialogCotizacionComponent,
+    VentasComponent,
   ],
   imports: [
     CommonModule,
@@ -45,6 +48,7 @@ import { DialogCotizacionComponent } from './cotizacion/dialog-cotizacion/dialog
     ProductoComponent,
     SedeComponent,
     InventarioRoutingModule,
+    VentasComponent
   ],
 })
 export class InventarioModule {}
