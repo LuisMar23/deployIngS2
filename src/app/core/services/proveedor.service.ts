@@ -20,11 +20,11 @@ export class ProveedorService {
 
   listarProveedores(): Observable<IProveedor[]> {
     return this.httpClient
-      .get<IProveedor[]>(`${environment.API_URL}/inventario/proveedor/`, {headers:this.interceptor.getHeaders()});
+      .get<IProveedor[]>(`${environment.API_URL}/inventory/supplier/`, {headers:this.interceptor.getHeaders()});
   }
   agregarProveedor(proveedor: IProveedor): Observable<IProveedor> {
     return this.httpClient.post<IProveedor>(
-      `${environment.API_URL}/inventario/proveedor/`,
+      `${environment.API_URL}/inventory/supplier/`,
       proveedor,
       { headers: this.interceptor.getHeaders() }
     );
@@ -32,14 +32,14 @@ export class ProveedorService {
 
   editarProveedor(proveedor: IProveedor): Observable<IProveedor> {
     return this.httpClient.put<IProveedor>(
-      `${environment.API_URL}/inventario/proveedor/${proveedor.id}/`,
+      `${environment.API_URL}/inventory/supplier/${proveedor.id}/`,
       proveedor,
       { headers: this.interceptor.getHeaders() }
     );
   }
   modificarEstadoProveedor(id: number, accion: number): Observable<any> {
     return this.httpClient.delete(
-      `${environment.API_URL}/inventario/proveedor/${id}/`,
+      `${environment.API_URL}/inventory/supplier/${id}/`,
       { headers: this.interceptor.getHeaders(), params:{accion:accion} }
     );
   }

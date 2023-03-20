@@ -9,6 +9,7 @@ import { AuthModule } from './modules/auth/auth.module';
 import { HomeModule } from './modules/home/home.module';
 import { InventarioModule } from './modules/inventario/inventario.module';
 import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { StoreModule } from '@ngrx/store';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform
     HttpClientModule,
     BrowserAnimationsModule,
     NoopAnimationsModule,
+    // StoreModule.forRoot({}, {}),
   ],
   providers: [CookieService, AdminGuard],
   bootstrap: [AppComponent],

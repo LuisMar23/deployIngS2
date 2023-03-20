@@ -18,13 +18,13 @@ export class AuthService {
 
   authToken(user: User): Observable<IJWTResponse> {
     return this.httpClient.post<IJWTResponse>(
-      `${environment.API_URL}/auth/auth/login/`,
+      `${environment.API_URL}/auth/login/`,
       user, {headers:this.getHeaders()}
     );
   }
 
   deleteToken(id: string): Observable<any> {
-    return this.httpClient.post(`${environment.API_URL}/auth/auth/logout/`, 
+    return this.httpClient.post(`${environment.API_URL}/auth/logout/`,
     { user: id}, {headers:this.getHeaders()}
     );
   }

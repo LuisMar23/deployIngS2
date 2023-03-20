@@ -32,14 +32,12 @@ export class LoginComponent implements OnInit {
     this.authService.authToken(user).subscribe({next:(data) => {
       this.saveToken(data);
       this.route.navigate(['/home']);
-      //metodo refactorizado Rober Guerrero
     }, error:(error) => this._alertService.alertError("Credenciales incorrectas")});
     this.form.reset();
   }
 
   private saveToken(resp: IJWTResponse) {
     this.cookieService.set('user', resp.user.username,1,'/');
-    this.cookieService.set('id', resp.user.id.toString(), 1, '/');
     this.cookieService.set('access', resp.access, 1, '/');
     this.cookieService.set('refresh', resp.refresh, 1, '/');
     this.cookieService.set('rol', resp.user.usertype, 1, '/');
