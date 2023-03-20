@@ -12,7 +12,7 @@ import { VentasService } from 'src/app/core/services/ventas.service';
   styleUrls: ['./ventas.component.css']
 })
 export class VentasComponent implements OnInit,AfterViewInit {
-  displayedColumns:string[]=['id','serial','precio','precioVenta','impuesto','total','fecha','producto','estado','opciones']
+  displayedColumns:string[]=['id','serial_number','price','buy_price','sale_tax','saleTotal','date_created','producto','is_active','opciones']
   private listaVentas!:IVenta[];
  
   dataSource = new MatTableDataSource<IVenta>(this.listaVentas);
