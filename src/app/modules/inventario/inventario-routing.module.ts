@@ -6,6 +6,7 @@ import { DialogProductoComponent } from './producto/dialog-producto/dialog-produ
 import { ProductoComponent } from './producto/producto.component';
 import { ProveedorComponent } from './proveedor/proveedor.component';
 import { SedeComponent } from './sede/sede.component';
+import { VentasComponent } from './ventas/ventas.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,7 @@ const routes: Routes = [
       { path: 'agregar', component: DialogProductoComponent },
       { path: 'sede', component: SedeComponent },
       { path: 'cotizacion', component: CotizacionComponent },
+      { path: 'ventas', component: VentasComponent },
       { path: '**', redirectTo: 'proveedor', pathMatch: 'full' },
     ],
     canActivateChild: [AdminGuard],
