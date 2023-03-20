@@ -23,7 +23,7 @@ import { StoreModule } from '@ngrx/store';
     HttpClientModule,
     BrowserAnimationsModule,
     NoopAnimationsModule,
-    StoreModule.forRoot({}, {}),
+    // StoreModule.forRoot({}, {}),
   ],
   providers: [CookieService, AdminGuard],
   bootstrap: [AppComponent],
