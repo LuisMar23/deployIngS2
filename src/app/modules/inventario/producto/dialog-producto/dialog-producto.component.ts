@@ -154,7 +154,6 @@ export class DialogProductoComponent implements OnInit {
       purchase_price: ['', [Validators.required, Validators.min(0)]],
       selling_price: ['', [Validators.required, Validators.min(0)]],
       branchOffice: ['', Validators.required],
-      supplier: ['', Validators.required],
       image: [''],
     });
   }

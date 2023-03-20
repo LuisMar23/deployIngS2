@@ -14,7 +14,7 @@ export class VentasService {
     private interceptor: InterceptorService) { }
 
   listarVentas():Observable<IVenta[]>{
-    return this._httpClient.get<IVenta[]>(`${environment}/inventario/ventas/`,
+    return this._httpClient.get<IVenta[]>(`${environment}/sale/detail/`,
     {headers:this.interceptor.getHeaders()});
   }
 }

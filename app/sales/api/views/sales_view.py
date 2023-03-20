@@ -4,16 +4,16 @@ from rest_framework.request import Request
 from rest_framework.response import Response
 
 
-from ..serializers import SaleSerializer, SaleDetailCreate
+from ..serializers import SaleListSerializer, SaleDetailCreate
 
 
 class SaleViewSet(viewsets.ModelViewSet):
     http_method_names = ['get', 'post']
-    serializer_class = {
-        'list': SaleSerializer,
-        'create': SaleDetailCreate,
-        'default': SaleSerializer
-    }
+    serializer_class = {    
+        'list': SaleListSerializer,    
+        'create': SaleDetailCreate,    
+        'default': SaleListSerializer
+        }
     view_permissions = {
         'create,list': {'admin': True, 'contador': True},
     }

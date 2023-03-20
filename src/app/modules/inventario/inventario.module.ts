@@ -19,6 +19,7 @@ import { DialogCotizacionComponent } from './cotizacion/dialog-cotizacion/dialog
 import { VentasComponent } from './ventas/ventas.component';
 
 
+
 @NgModule({
   declarations: [
     ProveedorComponent,
@@ -31,7 +32,7 @@ import { VentasComponent } from './ventas/ventas.component';
     DialogProveedorComponent,
     DialogSedeComponent,
     DialogCotizacionComponent,
-    VentasComponent,
+    VentasComponent
   ],
   imports: [
     CommonModule,

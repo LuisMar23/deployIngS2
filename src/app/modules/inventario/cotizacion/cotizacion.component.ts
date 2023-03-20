@@ -19,9 +19,10 @@ import {
 })
 export class CotizacionComponent implements OnInit, AfterViewInit {
 
-  displayedColumns: string[] = ['id', 'nombre', 'cantidad', 'opciones'];
+  displayedColumns: string[] = ['id', 'name', 'stock', 'opciones'];
 
   public listaProductos: IProducto[] = [];
+  
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -89,11 +90,6 @@ export class CotizacionComponent implements OnInit, AfterViewInit {
   getForm() {
     return <FormArray>this.form.get('detalleEgreso');
   }
-  private listarProducto() {
-    this._productoService.listarProductos().subscribe((data: IProducto[]) => {
-      this.dataSource.data = data.filter(
-        (producto) => producto.is_active == true && producto.stock > 0
-      );
-    });
-  }
+  
+  private listarProducto() {  this._productoService.listarProductos().subscribe((data: IProducto[]) => {      console.log(data);    this.dataSource.data = data.filter(      (producto) => producto.is_active == true    );  });}
 }
