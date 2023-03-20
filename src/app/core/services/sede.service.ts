@@ -16,7 +16,7 @@ export class SedeService {
 
   listarSede(): Observable<ISede[]> {
     return this.http
-      .get<ISede[]>(`${environment.API_URL}/inventario/sede/`, {headers: this.interceptor.getHeaders()});
+      .get<ISede[]>(`${environment.API_URL}/inventory/sede/`, {headers: this.interceptor.getHeaders()});
     // .get<IResponse>(`${environment.API_URL}/inventory/sede/`)
     // .pipe(map((res) => {
     //   this.cantidadSede = res.count;
@@ -25,13 +25,13 @@ export class SedeService {
   }
   agregarSede(sede: any): Observable<any> {
     sede.estado = true;
-    return this.http.post(`${environment.API_URL}/inventario/sede/`, sede, {
+    return this.http.post(`${environment.API_URL}/inventory/sede/`, sede, {
       headers: this.interceptor.getHeaders(),
     });
   }
   modificarSede(sede: ISede): Observable<ISede> {
     return this.http.put<ISede>(
-      `${environment.API_URL}/inventario/sede/${sede.id}/`,
+      `${environment.API_URL}/inventory/sede/${sede.id}/`,
       sede,
       {
         headers: this.interceptor.getHeaders(),
@@ -39,7 +39,7 @@ export class SedeService {
     );
   }
   modificarEstadoSede(id: number, accion: number): Observable<any> {
-    return this.http.delete(`${environment.API_URL}/inventario/sede/${id}/`, {
+    return this.http.delete(`${environment.API_URL}/inventory/sede/${id}/`, {
       headers: this.interceptor.getHeaders(),
       params: { accion: accion },
     });

@@ -22,7 +22,7 @@ export class ProductoService {
 
   listarProductos(): Observable<IProducto[]> {
     return this._httpClient.get<IProducto[]>(
-      `${environment.API_URL}/inventario/producto/`,
+      `${environment.API_URL}/inventory/producto/`,
       {
         headers: this.interceptor.getHeaders(),
       }
@@ -31,27 +31,27 @@ export class ProductoService {
 
   agregarProducto(producto: IProducto): Observable<IProducto> {
     return this._httpClient.post<IProducto>(
-      `${environment.API_URL}/inventario/producto/`,
+      `${environment.API_URL}/inventory/producto/`,
       producto,
       { headers: this.interceptor.getHeaders() }
     );
   }
   modificarProducto(producto: IProducto): Observable<IProducto> {
     return this._httpClient.put<IProducto>(
-      `${environment.API_URL}/inventario/producto/${producto.id}/`,
+      `${environment.API_URL}/inventory/producto/${producto.id}/`,
       producto,
       { headers: this.interceptor.getHeaders() }
     );
   }
   modificarEstadoProducto(id: number, accion: number): Observable<any> {
     return this._httpClient.delete(
-      `${environment.API_URL}/inventario/producto/${id}/`,
+      `${environment.API_URL}/inventory/producto/${id}/`,
       { headers: this.interceptor.getHeaders(), params: { accion: accion } }
     );
   }
   saveExcel(productos: IProducto[]): Observable<any> {
     return this._httpClient.post(
-      `${environment.API_URL}/inventario/producto/uploadExcel/`,
+      `${environment.API_URL}/inventory/producto/uploadExcel/`,
       productos,
       { headers: this.interceptor.getHeaders() }
     );

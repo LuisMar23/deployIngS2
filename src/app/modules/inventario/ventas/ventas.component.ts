@@ -2,9 +2,9 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { ISede } from 'src/app/core';
 import { IVenta } from 'src/app/core/interfaces/venta';
 import { VentasService } from 'src/app/core/services/ventas.service';
+
 
 @Component({
   selector: 'app-ventas',

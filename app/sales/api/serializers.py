@@ -4,9 +4,15 @@ from app.sales.models import Sales, SaleDetail, IncomeDetail, Income
 from app.inventory.api.serializers import ProductSerializer
 
 
-class SaleSerializer(serializers.ModelSerializer):
+class SaleListSerializer(serializers.ModelSerializer):
     products = ProductSerializer(many=True)
 
+    class Meta:
+        model = Sales
+        exclude = ('date_created',)
+
+class SaleSerializer(serializers.ModelSerializer):
+    
     class Meta:
         model = Sales
         exclude = ('date_created',)
