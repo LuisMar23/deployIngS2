@@ -1,5 +1,5 @@
 from django.db import models
-from app.inventory.models import Product, Supplier
+from app.inventory.models import Product
 
 
 class Income(models.Model):
@@ -10,7 +10,6 @@ class Income(models.Model):
     is_active = models.BooleanField(default=True)
     date_created = models.DateField("Registration date", auto_now_add=True)
     products = models.ManyToManyField(Product, through="IncomeDetail")
-    supplier = models.ForeignKey(Supplier, on_delete=models.CASCADE)
 
     class Meta:
         db_table = "income"
