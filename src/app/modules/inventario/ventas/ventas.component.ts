@@ -35,4 +35,9 @@ export class VentasComponent implements OnInit,AfterViewInit {
       this.dataSource.data=resp;
     });
   }
+  modificarEstado(id: number, accion: number) {
+    this.ventaService.modificarEstadoVenta(id,accion).subscribe((data)=>{
+      this.listarVentas();
+    })
+  }
 }
