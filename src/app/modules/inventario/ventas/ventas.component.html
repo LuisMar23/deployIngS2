@@ -89,22 +89,13 @@
                                 <ng-container matColumnDef="opciones">
                                     <th mat-header-cell *matHeaderCellDef>Acciones</th>
                                     <td mat-cell *matCellDef="let element">
-                                        <!-- <button (click)="openDialogForEdit(element)" class="btn btn-warning">
-                                            <i class="fa fa-pen"> </i>
-                                        </button>
-                                        &nbsp;
-                                        <button (click)="modificarEstado(element.id, 0)" class="btn btn-danger"
-                                            *ngIf="element.is_active == 1">
-                                            <i class="fa fa-trash"> </i>
-                                        </button>
-                                        <button (click)="modificarEstado(element.id, 1)" class="btn btn-success"
-                                            *ngIf="element.is_active == 0">
-                                            <i class="fa fa-check"> </i>
-                                        </button>
-                                        &nbsp;
-                                        <button class="btn btn-primary" (click)="openDialogForDetail(element)">
-                                            <i class="fa fa-eye"></i>
-                                        </button> -->
+                                      <button
+                                        (click)="modificarEstado(element.id, 0)"
+                                        class="btn btn-danger"
+                                        *ngIf="element.is_active == 1"
+                                      >
+                                        <i class="fa fa-trash"> </i>
+                                      </button>
                                     </td>
 
                                 </ng-container>
