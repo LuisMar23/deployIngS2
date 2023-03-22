@@ -1,6 +1,6 @@
 from django.db import models
 
-from . import Supplier
+from .Supplier import Supplier
 # from django.contrib.auth import get_user_model
 from .BranchOffice import BranchOffice
 from app.users.models.User import User
@@ -19,7 +19,7 @@ class Product(models.Model):
     bar_code = models.ImageField('Bar code', null=True, upload_to="productos/barcode/")
     is_active = models.BooleanField(default=True)
     date_created = models.DateField("Registration date", auto_now_add=True)
-    supplier = models.ForeignKey(Supplier, on_delete=models.CASCADE)
+    #supplier = models.ForeignKey(Supplier, on_delete=models.CASCADE)
     branchOffice = models.ForeignKey(BranchOffice, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
 
