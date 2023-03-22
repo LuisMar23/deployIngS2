@@ -9,8 +9,8 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ("inventory", "0001_initial"),
         ("almacen", "0001_initial"),
+        ("inventory", "0001_initial"),
     ]
 
     operations = [

@@ -4,6 +4,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { IVenta } from 'src/app/core/interfaces/venta';
 import { VentasService } from 'src/app/core/services/ventas.service';
+import { MatFormFieldControl } from '@angular/material/form-field';
 
 
 @Component({
@@ -12,7 +13,7 @@ import { VentasService } from 'src/app/core/services/ventas.service';
   styleUrls: ['./ventas.component.css']
 })
 export class VentasComponent implements OnInit,AfterViewInit {
-  displayedColumns:string[]=['id','serial_number','price','buy_price','sale_tax','saleTotal','date_created','producto','is_active','opciones']
+  displayedColumns:string[]=['id','serial_number','sale_price','buy_price','sale_tax','sale_total','receipt_type','is_active','opciones']
   private listaVentas!:IVenta[];
  
   dataSource = new MatTableDataSource<IVenta>(this.listaVentas);
@@ -31,8 +32,11 @@ export class VentasComponent implements OnInit,AfterViewInit {
   }
 
   listarVentas(){
-    this.ventaService.listarVentas().subscribe((resp:IVenta[])=>{
-      this.dataSource.data=resp;
+    this.ventaService.listarVentas().subscribe({next: (data) =>{
+      this.dataSource.data = data;
+      console.log(data);
+      this.paginator._changePageSize(this.paginator.pageSize);
+    },
     });
   }
   modificarEstado(id: number, accion: number) {

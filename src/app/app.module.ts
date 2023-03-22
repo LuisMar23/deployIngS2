@@ -9,6 +9,7 @@ import { AuthModule } from './modules/auth/auth.module';
 import { HomeModule } from './modules/home/home.module';
 import { InventarioModule } from './modules/inventario/inventario.module';
 import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { MatFormField, MatFormFieldControl } from '@angular/material/form-field';
 
 
 
@@ -22,7 +23,7 @@ import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform
     InventarioModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    NoopAnimationsModule,
+    NoopAnimationsModule
     // StoreModule.forRoot({}, {}),
   ],
   providers: [CookieService, AdminGuard],

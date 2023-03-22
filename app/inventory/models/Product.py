@@ -1,6 +1,6 @@
 from django.db import models
 
-from . import Supplier
+from .Supplier import Supplier
 # from django.contrib.auth import get_user_model
 from .BranchOffice import BranchOffice
 from app.users.models.User import User
