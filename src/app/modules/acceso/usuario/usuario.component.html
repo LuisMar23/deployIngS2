@@ -111,7 +111,6 @@
                       (click)="modificarEstado(element.id, 0)"
                       class="btn btn-danger"
                       *ngIf="element.is_active == 1"
-                      [disabled]="element.username == getUserAuth()"
                     >
                       <i class="fa fa-trash"> </i>
                     </button>
@@ -119,7 +118,6 @@
                       (click)="modificarEstado(element.id, 1)"
                       class="btn btn-success"
                       *ngIf="element.is_active == 0"
-                      [disabled] ="element.username == getUserAuth()"
                     >
                       <i class="fa fa-check"> </i>
                     </button>

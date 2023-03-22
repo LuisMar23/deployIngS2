@@ -21,18 +21,18 @@ export class UsuarioService {
   
   obtenerUsuarios(): Observable<any> {
     return this.httpClient
-      .get<IResponse>(`${environment.API_URL}/usuario/usuario/`,{ headers: this.interceptor.getHeaders() });
+      .get<IResponse>(`${environment.API_URL}/users/users/`,{ headers: this.interceptor.getHeaders() });
   }
   agregarUsuario(usuario: User): Observable<User> {
     return this.httpClient.post<User>(
-      `${environment.API_URL}/usuario/usuario/`,
+      `${environment.API_URL}/users/users/`,
       usuario,
       { headers: this.interceptor.getHeaders() }
     );
   }
 
   modificarEstadoUsuario(id: number, accion: number): Observable<any> {
-    return this.httpClient.delete(`${environment.API_URL}/usuario/usuario/${id}/`, {
+    return this.httpClient.delete(`${environment.API_URL}/users/users/${id}/`, {
       headers: this.interceptor.getHeaders(),
       params: { accion: accion },
     });
