@@ -110,8 +110,7 @@ export class ProductoComponent implements OnInit, AfterViewInit {
   }
 
   listarProductos(): void {
-    this._productoService.listarProductos().subscribe({
-      next: (data) => {
+    this._productoService.listarProductos().subscribe({next: (data) => {
         console.log(data);
         this.dataSource.data = data;
         this.paginator._changePageSize(this.paginator.pageSize);

@@ -17,6 +17,7 @@ import { DialogProveedorComponent } from './proveedor/dialog-proveedor/dialog-pr
 import { DialogSedeComponent } from './sede/dialog-sede/dialog-sede.component';
 import { DialogCotizacionComponent } from './cotizacion/dialog-cotizacion/dialog-cotizacion.component';
 import { VentasComponent } from './ventas/ventas.component';
+import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
 
 
 
@@ -33,6 +34,8 @@ import { VentasComponent } from './ventas/ventas.component';
     DialogSedeComponent,
     DialogCotizacionComponent,
     VentasComponent
+    
+    
   ],
   imports: [
     CommonModule,
@@ -42,7 +45,9 @@ import { VentasComponent } from './ventas/ventas.component';
     DataTablesModule,
     HttpClientModule,
     MdbModalModule,
-    MatInputModule
+    MatInputModule,
+    MatFormFieldModule
+
   ],
   exports: [
     ProveedorComponent,

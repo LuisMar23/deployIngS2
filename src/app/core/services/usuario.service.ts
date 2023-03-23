@@ -20,9 +20,15 @@ export class UsuarioService {
   ) {}
   
   obtenerUsuarios(): Observable<any> {
+<<<<<<< HEAD
     return this.httpClient
       .get<IResponse>(`${environment.API_URL}/users/users/`,{ headers: this.interceptor.getHeaders() });
+=======
+    return this.httpClient.get<IResponse>(`${environment.API_URL}/usuario/usuario/`,{ headers: this.interceptor.getHeaders() });
+>>>>>>> 9d7db485df1408613d07163a01adb483fd9526a5
   }
+
+
   agregarUsuario(usuario: User): Observable<User> {
     return this.httpClient.post<User>(
       `${environment.API_URL}/users/users/`,
