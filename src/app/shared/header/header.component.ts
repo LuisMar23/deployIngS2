@@ -29,12 +29,12 @@ export class HeaderComponent implements OnInit {
       confirmButtonText: 'Si, cerrar sesion!',
     }).then((result) => {
       if (result.isConfirmed) {
-        const userid = this._cookieService.get('id');
+        const userid = this._cookieService.get('user');
         this.authService.deleteToken(userid).subscribe(data => {
           console.log(data);
           this._cookieService.deleteAll('/');
           this._router.navigate(['/auth']);
-          
+
         })
       }
     });

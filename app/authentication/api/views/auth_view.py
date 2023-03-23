@@ -35,6 +35,7 @@ class AuthenticationViewSet(viewsets.GenericViewSet, TokenObtainPairView):
 
     @action(detail=False, methods=['post'])
     def logout(self, request):
-        user = get_object_or_404(User, pk=int(request.data.get('user', '')))
+        # user = get_object_or_404(User, pk=int(request.data.get('user', '')))
+        user = User.objects.get(username=request.data.get('user', ''))
         RefreshToken.for_user(user=user)
         return Response({"message": "Sesion cerrada correctamente"}, status=status.HTTP_200_OK)
