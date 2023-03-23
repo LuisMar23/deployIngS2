@@ -20,7 +20,8 @@ export class UsuarioService {
   ) {}
   
   obtenerUsuarios(): Observable<any> {
-    return this.httpClient.get<IResponse>(`${environment.API_URL}/users/users/`,{ headers: this.interceptor.getHeaders() });
+    return this.httpClient
+      .get<IResponse>(`${environment.API_URL}/users/users/`,{ headers: this.interceptor.getHeaders() });
   }
 
 
