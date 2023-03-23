@@ -9,7 +9,7 @@
                     <div class="card">
                         <div class="card-body">
                             <mat-form-field appearance="standard">
-                                <input matInput type="text" placeholder="Buscar..." #input class="form-control" />
+                                <input matInput type="text"  (keyup)="applyFilter($event)" placeholder="Buscar..." #input class="form-control" />
                             </mat-form-field>
                             <table class="table table-striped" mat-table [dataSource]="dataSource" matSort>
 
@@ -97,7 +97,6 @@
                                         <i class="fa fa-trash"> </i>
                                       </button>
                                     </td>
-
                                 </ng-container>
 
                                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
