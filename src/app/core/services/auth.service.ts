@@ -23,9 +23,9 @@ export class AuthService {
     );
   }
 
-  deleteToken(id: string): Observable<any> {
+  deleteToken(username: string): Observable<any> {
     return this.httpClient.post(`${environment.API_URL}/auth/logout/`,
-    { user: id}, {headers:this.getHeaders()}
+    { user: username}, {headers:this.getHeaders()}
     );
   }
 
