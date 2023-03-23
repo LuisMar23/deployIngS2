@@ -17,7 +17,7 @@ export class VentasService {
     return this._httpClient.get<IVenta[]>(`${environment.API_URL}/sale/detail/`,{ headers: this.interceptor.getHeaders()});
   }
   modificarEstadoVenta(id:number,accion:number):Observable<any>{
-    return this._httpClient.put(`${environment}/sale/detail/${id}`,
+    return this._httpClient.delete(`${environment.API_URL}/sale/detail/${id}`,
     { headers: this.interceptor.getHeaders(), params: { accion: accion } })
   }
 }

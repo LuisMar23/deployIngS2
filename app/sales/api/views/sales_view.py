@@ -10,14 +10,14 @@ from ..serializers import SaleListSerializer, SaleDetailCreate
 from ...models import Sales
 
 class SaleViewSet(viewsets.ModelViewSet):
-    http_method_names = ['get', 'post','put']
+    # http_method_names = ['get', 'post','put']
     serializer_class = {    
         'list': SaleListSerializer,    
         'create': SaleDetailCreate,    
         'default': SaleListSerializer
-        }
+    }
     view_permissions = {
-        'create,list,destroy': {'admin': True, 'contador': True},
+        'create,destroy,update,list': {'admin': True, 'contador': True},
     }
     queryset = None
 
@@ -33,9 +33,10 @@ class SaleViewSet(viewsets.ModelViewSet):
         sale_serializer.is_valid(raise_exception=True)
         sale_serializer.save()
         return Response({"message": "venta realizada con exito"})
+    
     def destroy(self, request, pk):
         estado = int(request.query_params.get("accion"))
         sales = get_object_or_404(Sales, pk=pk)
         sales.is_active = estado
         sales.save()
-        return Response({"estado": estado}, status=status.HTTP_200_OK)      
+        return Response({"estado": estado},status=status.HTTP_200_OK)      
