@@ -10,6 +10,11 @@ import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
 import { DialogProductoComponent } from './dialog-producto/dialog-producto.component';
 import { DialogDetalleComponent } from './dialog-detalle/dialog-detalle.component';
 import * as XLSX from 'xlsx';
+import {Observable} from "rxjs";
+import {Store} from "@ngrx/store";
+import {AppState} from "../../../app.state";
+import {selectProducts} from "./state/product.selector";
+import {productAction} from "./state/product.action";
 
 @Component({
   selector: 'app-producto',
@@ -17,6 +22,7 @@ import * as XLSX from 'xlsx';
   styleUrls: ['./producto.component.css'],
 })
 export class ProductoComponent implements OnInit, AfterViewInit {
+  loadProducts$:Observable<Array<IProducto>> = new Observable<Array<IProducto>>();
   displayedColumns: string[] = [
     'id',
     'name',
@@ -42,11 +48,16 @@ export class ProductoComponent implements OnInit, AfterViewInit {
   constructor(
     private _productoService: ProductoService,
     private modalService: MdbModalService,
-    private alertService: AlertsService
+    private alertService: AlertsService,
+    private store:Store<AppState>
   ) {}
 
   ngOnInit(): void {
-    this.listarProductos();
+    this.store.dispatch(productAction.loadProducts({products:[]}));
+    this.loadProducts$ = this.store.select(selectProducts);
+    this.loadProducts$.subscribe({next:(value) => {
+      this.dataSource.data = [...value];
+    }});
   }
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;

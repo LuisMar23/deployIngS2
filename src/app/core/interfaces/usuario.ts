@@ -7,3 +7,8 @@ export interface User{
     is_active: boolean,
     is_staff: boolean
 }
+
+export interface Credentials {
+    username:string;
+    password:string;
+}

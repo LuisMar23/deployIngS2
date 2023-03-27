@@ -13,6 +13,11 @@ import {
   IProveedor,
   ISede,
 } from 'src/app/core';
+import {Store} from "@ngrx/store";
+import {AppState} from "../../../../app.state";
+import {productAction} from "../state/product.action";
+import {filter, Observable, Observer, take, tap} from "rxjs";
+import {selectProducts} from "../state/product.selector";
 
 @Component({
   selector: 'app-dialog-producto',
@@ -20,6 +25,8 @@ import {
   styleUrls: ['./dialog-producto.component.css'],
 })
 export class DialogProductoComponent implements OnInit {
+  product$:Observable<any> = new Observable<any>();
+
   public form!: FormGroup;
   sedes: ISede[] = [];
   proveedores: IProveedor[] = [];
@@ -32,14 +39,14 @@ export class DialogProductoComponent implements OnInit {
     private _productoService: ProductoService,
     private _sedeService: SedeService,
     private _proveedorService: ProveedorService,
-    private _alertService: AlertsService
+    private _alertService: AlertsService,
+    private store:Store<AppState>
   ) {
-    //Luis Martinez RF3
-    //Creaacion de un submetodo para las propiedades de producto que pueden aumentar a futuro lo que haria mas grande el codigo
     this.form = this.propProducto();
   }
 
   ngOnInit(): void {
+    this.product$ = this.store.select(selectProducts);
     if (this.productoEdit) {
       this.setForm();
     }
@@ -58,26 +65,33 @@ export class DialogProductoComponent implements OnInit {
     }
   }
 
-  //Luis Martinez RF2
-  //Crear submetodo que recibe una imagen selecciona que sirve para codificar la imagen
   cargarImagen(event: any) {
     const fileCapture = event.target.files[0];
     this.encodeImg(fileCapture);
   }
 
-  private addProducto(producto: IProducto) {
-    this._productoService.agregarProducto(producto).subscribe({
-      next: (response) => {
-        console.log(response);
-        this._alertService.alertSucces('Product Registrado');
-        this.form.reset();
-        this.modalRef.close(response);
-      },
-      error: (error) => {
-        console.log(error);
-        this._alertService.alertError('A ocurrido un error');
-      },
-    });
+  private addProducto(product: IProducto) {
+
+    this.store.dispatch(productAction.addProduct({product}));
+    this.store.select(selectProducts).pipe(
+      take(1)
+    ).subscribe(() => {
+      this._alertService.alertSucces("Producto Registrado");
+      this.form.reset();
+      this.modalRef.close();
+    })
+    // this._productoService.agregarProducto(producto).subscribe({
+    //   next: (response) => {
+    //     console.log(response);
+    //     this._alertService.alertSucces('Product Registrado');
+    //     this.form.reset();
+    //     this.modalRef.close(response);
+    //   },
+    //   error: (error) => {
+    //     console.log(error);
+    //     this._alertService.alertError('A ocurrido un error');
+    //   },
+    // });
   }
 
   private updateProducto(producto: IProducto) {
