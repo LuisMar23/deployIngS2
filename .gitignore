@@ -39,6 +39,7 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
-migrations/
 __pycache__/
 db.sqlite3
+**/migrations/
+
