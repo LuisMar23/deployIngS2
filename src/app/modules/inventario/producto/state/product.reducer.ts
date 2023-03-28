@@ -10,16 +10,11 @@ const initialState:ProductState = {
 }
 export const productReducer = createReducer(
   initialState,
-  on(productAction.addProduct, (state) => {
-    return{
-      ...state,
-      isLoading: true
-    }
-  }),
-  on(productAction.addProductSuccess, (state, payload) => {
+  on(productAction.addProduct, (state) => ({...state, isLoading: true})),
+  on(productAction.addProductSuccess, (state, {product}) => {
     return {
       ...state,
-      products: [...state.products, payload.product],
+      products: [...state.products, product],
       isLoading: false
     }
   }),
@@ -43,11 +38,24 @@ export const productReducer = createReducer(
       isLoading: false
     }
   }),
-  on(productAction.loadProductsFailure, (state, payload) => {
+  on(productAction.loadProductsFailure, (state, {error}) => {
     return {
       ...state,
       isLoading: false,
-      error: payload.error
+      error: error
     }
-  })
+  }),
+  on(productAction.updateProduct, (state) => ({...state, isLoading: true, error: null})),
+  on(productAction.updateProductSuccess, (state, {product}) => {
+    const productsUpdated = state.products.map(productInList => (
+      productInList.id !== product.id ? productInList : product
+    ));
+    return {
+      ...state,
+      isLoading: false,
+      products: productsUpdated,
+      error: null
+    }
+  }),
+  on(productAction.updateProductFailure, (state, {error}) => ({...state, isLoading: false, error: error}))
 )

@@ -74,7 +74,7 @@ export class ProductoComponent implements OnInit, AfterViewInit {
     });
     this.modalRef.onClose.subscribe({
       next: (response: IProducto) => {
-        if (response) this.listarProductos();
+        if (response) console.log(response);
       },
     });
   }
