@@ -2,8 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
-import Swal from 'sweetalert2';
-import { User,IJWTResponse,AuthService, AlertsService } from 'src/app/core';
+import { AuthService, AlertsService, Credentials} from 'src/app/core';
+import {Store} from "@ngrx/store";
+import {authActions} from "../../state/auth.actions";
+import {filter, Observable, take, tap} from "rxjs";
+import {selectAuthError, selectUserAuthenticated} from "../../state/auth.selector";
+import {AppState} from "../../../../app.state";
 
 @Component({
   selector: 'app-login',
@@ -12,13 +16,15 @@ import { User,IJWTResponse,AuthService, AlertsService } from 'src/app/core';
 })
 export class LoginComponent implements OnInit {
   public form: FormGroup;
-
+  isAuthenticated$: Observable<boolean> = new Observable<boolean>();
+  authError$: Observable<string | null> = new Observable<string | null>();
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
     private cookieService: CookieService,
     private route: Router,
     private _alertService:AlertsService,
+    private store:Store<AppState>,
   ) {
     this.form = this.fb.group({
       username: ['', [Validators.required]],
@@ -26,20 +32,24 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
-  login(): void {
-    const user:User = this.form.value;
-    this.authService.authToken(user).subscribe({next:(data) => {
-      this.saveToken(data);
-      this.route.navigate(['/home']);
-    }, error:(error) => this._alertService.alertError("Credenciales incorrectas")});
-    this.form.reset();
+  ngOnInit(): void {
+    this.isAuthenticated$ = this.store.select(selectUserAuthenticated);
+    this.authError$ = this.store.select(selectAuthError).pipe(
+      filter(error => error !== null),
+      tap(error => this._alertService.alertError(`${error}`))
+    )
   }
 
-  private saveToken(resp: IJWTResponse) {
-    this.cookieService.set('user', resp.user.username,1,'/');
-    this.cookieService.set('access', resp.access, 1, '/');
-    this.cookieService.set('refresh', resp.refresh, 1, '/');
-    this.cookieService.set('rol', resp.user.usertype, 1, '/');
+  login(){
+    const userCredentials:Credentials = this.form.value;
+    this.store.dispatch(authActions.startLogin(userCredentials));
+
+    this.isAuthenticated$.pipe(
+      filter(authenticated => authenticated),
+      take(1),
+    ).subscribe(()=>
+      this.route.navigate(['/home'])
+    )
+    this.form.reset();
   }
 }
