@@ -8,7 +8,7 @@
   ></button>
 </div>
 <div class="modal-body">
-  <form [formGroup]="form" (ngSubmit)="submitProducto()">
+  <form [formGroup]="form" (ngSubmit)="submitProduct()">
     <div class="row">
       <input type="hidden" formArrayName="id">
       <div class="col-lg-6">
@@ -98,7 +98,7 @@
       <div class="col-lg-6">
         <label>Sede(*)</label>
         <select formControlName="branchOffice" class="form-control mb-2">
-          <option 
+          <option
           *ngFor="let sede of sedes;"
           [value]="sede.id"
           >
@@ -109,7 +109,7 @@
       <div class="col-lg-6">
         <label>Proveedor(*)</label>
         <select formControlName="supplier" class="form-control mb-2">
-          <option 
+          <option
           *ngFor="let proveedor of proveedores;"
           [value]="proveedor.id"
           >
@@ -123,13 +123,13 @@
         <label>Imagen(*)</label>
         <input
           type="file"
-          (change)="cargarImagen($event)"
+          (change)="loadImage($event)"
           class="form-control col-5 mb-2"
         />
       </div>
-      <div class="col-lg-6">
-        <img width="150px" [src]="imagenBase64" alt="" />
-      </div>
+<!--      <div class="col-lg-6">-->
+<!--        <img width="150px" [src]="imagenBase64" alt="" />-->
+<!--      </div>-->
     </div>
     <br />
     <div class="modal-footer">

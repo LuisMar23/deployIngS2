@@ -1,18 +1,24 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { DomSanitizer } from '@angular/platform-browser';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
-import { MdbModalRef } from 'mdb-angular-ui-kit/modal';
+import {MdbModalRef} from 'mdb-angular-ui-kit/modal';
 
 import {
+  AlertsService,
+  IProducto,
+  IProveedor,
+  ISede,
   ProductoService,
   ProveedorService,
   SedeService,
-  IProducto,
-  AlertsService,
-  IProveedor,
-  ISede,
 } from 'src/app/core';
+import {Action, Store} from "@ngrx/store";
+import {AppState} from "../../../../app.state";
+import {productAction} from "../state/product.action";
+import {Observable, take} from "rxjs";
+import {selectProducts} from "../state/product.selector";
+import {uploadPicture} from "../../../../utils/uploadPicture";
+import {createForm} from "../form.product";
 
 @Component({
   selector: 'app-dialog-producto',
@@ -20,101 +26,63 @@ import {
   styleUrls: ['./dialog-producto.component.css'],
 })
 export class DialogProductoComponent implements OnInit {
+  product$:Observable<any> = new Observable<any>();
+  fileImg!:File;
+
   public form!: FormGroup;
   sedes: ISede[] = [];
   proveedores: IProveedor[] = [];
   productoEdit!: IProducto;
-  imagenBase64!: string;
   constructor(
     private fb: FormBuilder,
-    private _sanitizer: DomSanitizer,
     public modalRef: MdbModalRef<DialogProductoComponent>,
     private _productoService: ProductoService,
     private _sedeService: SedeService,
     private _proveedorService: ProveedorService,
-    private _alertService: AlertsService
+    private _alertService: AlertsService,
+    private store:Store<AppState>,
   ) {
-    //Luis Martinez RF3
-    //Creaacion de un submetodo para las propiedades de producto que pueden aumentar a futuro lo que haria mas grande el codigo
-    this.form = this.propProducto();
+    this.form = createForm();
   }
 
   ngOnInit(): void {
+    this.product$ = this.store.select(selectProducts);
     if (this.productoEdit) {
       this.setForm();
     }
     this.listarSede();
     this.listarProveedor();
   }
-
-  submitProducto() {
-    const producto: IProducto = this.form.value;
-    producto.image = this.imagenBase64;
-    producto.user = 1;
+  loadImage(event: any) {
+    this.fileImg = event.target.files[0] as File;
+  }
+  async submitProduct() {
+    const product: IProducto = this.form.value;
+    product.image = await uploadPicture(this.fileImg);
+    product.user = 1;
     if (!this.productoEdit) {
-      this.addProducto(producto);
+      this.addProduct(product);
     } else {
-      this.updateProducto(producto);
+      this.updateProduct(product);
     }
   }
-
-  //Luis Martinez RF2
-  //Crear submetodo que recibe una imagen selecciona que sirve para codificar la imagen
-  cargarImagen(event: any) {
-    const fileCapture = event.target.files[0];
-    this.encodeImg(fileCapture);
+  private handlerProductAction(action:Action, message:string){
+    this.store.dispatch(action);
+    this.store.select(selectProducts).pipe(
+      take(1)
+    ).subscribe(()=> {
+      this._alertService.alertSucces(message);
+      this.form.reset();
+      this.modalRef.close();
+    })
+  }
+  private addProduct(product: IProducto) {
+    this.handlerProductAction(productAction.addProduct({product}), "Producto Registrado");
   }
 
-  private addProducto(producto: IProducto) {
-    this._productoService.agregarProducto(producto).subscribe({
-      next: (response) => {
-        console.log(response);
-        this._alertService.alertSucces('Product Registrado');
-        this.form.reset();
-        this.modalRef.close(response);
-      },
-      error: (error) => {
-        console.log(error);
-        this._alertService.alertError('A ocurrido un error');
-      },
-    });
+  private updateProduct(product: IProducto) {
+    this.handlerProductAction(productAction.updateProduct({product}), "Producto Modificado");
   }
-
-  private updateProducto(producto: IProducto) {
-    console.log(producto);
-    this._productoService.modificarProducto(producto).subscribe({
-      next: (response) => {
-        console.log(response);
-        this._alertService.alertSucces('Product Actualizado');
-        this.form.reset();
-        this.modalRef.close();
-      },
-      error: (error) => {
-        console.log(error);
-      },
-    });
-  }
-
-  private encode64 = async ($event: any) =>
-    new Promise((resolve, reject) => {
-      try {
-        const unsafeImg = window.URL.createObjectURL($event);
-        const image = this._sanitizer.bypassSecurityTrustUrl(unsafeImg);
-        const reader = new FileReader();
-        reader.readAsDataURL($event);
-        reader.onload = () => {
-          resolve({
-            base: reader.result,
-          });
-        };
-        reader.onerror = (error) => {
-          resolve({
-            base: null,
-          });
-        };
-
-      } catch (e) {}
-    });
 
   private listarSede(): void {
     this._sedeService.listarSede().subscribe({
@@ -133,28 +101,5 @@ export class DialogProductoComponent implements OnInit {
   private setForm() {
     this.form.patchValue(this.productoEdit);
   }
-  //submetodo RF2
-  private encodeImg(fileCapture:any){
-    this.encode64(fileCapture).then((imagen: any) => {
-      console.log(imagen);
-      this.imagenBase64 = imagen.base;
-    });
-  }
 
-  //Submetodo RF3
-   propProducto(){
-    return this.fb.group({
-      id: [''],
-      name: ['', Validators.required],
-      description: ['', Validators.required],
-      stock: ['', Validators.required],
-      assurance_months: ['', Validators.required],
-      industry: ['', Validators.required],
-      marca: ['', Validators.required],
-      purchase_price: ['', [Validators.required, Validators.min(0)]],
-      selling_price: ['', [Validators.required, Validators.min(0)]],
-      branchOffice: ['', Validators.required],
-      image: [''],
-    });
-  }
 }
