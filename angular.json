@@ -17,6 +17,14 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies":  [
+              "pdfmake-wrapper.js",
+              "pdfmake/build/vfs_fonts",
+              "jsbarcode",
+              "sweetalert2",
+              "pdfmake-wrapper.js",
+              "pdfmake/build/pdfmake"
+           ],
             "outputPath": "dist/sistema-inventario-cybercorp",
             "index": "src/index.html",
             "main": "src/main.ts",
